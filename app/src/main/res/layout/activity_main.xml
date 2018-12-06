@@ -4,11 +4,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ParentActivity">
+        tools:context=".MainActivity">
 
-    <!-- Activity toolbar -->
     <include layout="@layout/toolbar"/>
 
-    
+    <!-- Extra stuff -->
 
 </android.support.constraint.ConstraintLayout>

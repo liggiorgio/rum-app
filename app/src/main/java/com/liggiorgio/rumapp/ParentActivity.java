@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 
 public abstract class ParentActivity extends AppCompatActivity {
 
+    // Appcompat toolbar reference
     Toolbar toolbar;
 
     @Override
@@ -22,5 +23,6 @@ public abstract class ParentActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
+    // Get the child layout to apply
     protected abstract int getLayoutResourceId();
 }

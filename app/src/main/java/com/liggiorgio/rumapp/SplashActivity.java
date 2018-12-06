@@ -8,6 +8,7 @@ package com.liggiorgio.rumapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import com.liggiorgio.rumapp.news.NewsActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         // Start the main activity
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, NewsActivity.class);
         startActivity(intent);
         finish();
     }

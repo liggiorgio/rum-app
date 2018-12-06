@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RUM App</string>
+    <string name="title_news">Home</string>
 </resources>

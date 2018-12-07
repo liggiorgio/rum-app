@@ -22,8 +22,6 @@
                 android:name=".news.NewsActivity"
                 android:label="@string/title_news">
         </activity>
-        <activity android:name=".DrawerActivity">
-        </activity>
     </application>
 
 </manifest>

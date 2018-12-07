@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 import com.liggiorgio.rumapp.DrawerActivity;
 import com.liggiorgio.rumapp.R;
 
@@ -39,6 +40,13 @@ public class NewsActivity extends DrawerActivity {
         // Adapter for items in the list
         newsAdapter = new NewsAdapter(newsSet);
         newsRecyclerView.setAdapter(newsAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu
+        getMenuInflater().inflate(R.menu.news_menu, menu);
+        return true;
     }
 
     @Override

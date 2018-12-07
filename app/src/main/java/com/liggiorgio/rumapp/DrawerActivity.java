@@ -3,7 +3,9 @@ package com.liggiorgio.rumapp;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
 public abstract class DrawerActivity extends ParentActivity {
@@ -13,6 +15,13 @@ public abstract class DrawerActivity extends ParentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Enable home button
+        ActionBar actionbar = getSupportActionBar();
+        assert actionbar != null;
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
 
         // Handle navigation click events
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -35,4 +44,15 @@ public abstract class DrawerActivity extends ParentActivity {
                 });
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

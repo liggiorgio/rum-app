@@ -5,12 +5,13 @@
 package com.liggiorgio.rumapp.news;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import com.liggiorgio.rumapp.ParentActivity;
+import com.liggiorgio.rumapp.DrawerActivity;
 import com.liggiorgio.rumapp.R;
 
-public class NewsActivity extends ParentActivity {
+public class NewsActivity extends DrawerActivity {
 
     // TODO: create ViewModel to fetch remote news
     private String[] newsSet = createDataset();
@@ -18,10 +19,12 @@ public class NewsActivity extends ParentActivity {
     private RecyclerView.LayoutManager newsLayoutManager;
     private RecyclerView.Adapter newsAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Highlight the item from the navigation drawer
+        ((NavigationView) findViewById(R.id.navigation_view)).getMenu().getItem(0).setChecked(true);
 
         // Reference the RecycleView
         newsRecyclerView = findViewById(R.id.news_list);

@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">RUM App</string>
     <string name="title_news">Home</string>
+    <string name="drawer_news">Home</string>
+    <string name="company_name">Rete Universitaria Mediterranea</string>
 </resources>

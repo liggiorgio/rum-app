@@ -15,7 +15,6 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
 
         // Start the main activity
         Intent intent = new Intent(this, NewsActivity.class);

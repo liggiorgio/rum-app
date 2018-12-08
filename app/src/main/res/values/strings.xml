@@ -1,7 +1,14 @@
 <resources>
+
+    <!-- Global -->
     <string name="app_name">RUM App</string>
-    <string name="title_news">Home</string>
-    <string name="drawer_news">Home</string>
     <string name="company_name">Rete Universitaria Mediterranea</string>
-    <string name="action_settings">Impostazioni</string>
+
+    <!-- Activities & drawer -->
+    <string name="title_news">Home</string>
+    <string name="title_cats">Categorie</string>
+
+    <!-- Menus -->
+    <string name="string_settings">Impostazioni</string>
+
 </resources>

@@ -6,6 +6,7 @@
 
 package com.liggiorgio.rumapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -14,6 +15,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import com.liggiorgio.rumapp.cats.CategoriesActivity;
+import com.liggiorgio.rumapp.news.NewsActivity;
 
 public abstract class DrawerActivity extends ParentActivity {
 
@@ -23,6 +26,9 @@ public abstract class DrawerActivity extends ParentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Highlight the corresponding item in the navigation drawer
+        ((NavigationView) findViewById(R.id.navigation_view)).getMenu().getItem(getMenuItemId()).setChecked(true);
 
         // Inflate child layout in parent
         LinearLayout contentLayout = findViewById(R.id.content_layout);
@@ -49,6 +55,21 @@ public abstract class DrawerActivity extends ParentActivity {
 
                         // TODO: Add code here to update the UI based on the item selected
                         // For example, swap UI fragments here
+                        switch (menuItem.getItemId()) {
+                            case R.id.action_home: {
+                                // Go to home activity
+                                Intent intent = new Intent(getApplicationContext(), NewsActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } break;
+                            case R.id.action_cats: {
+                                // Go to categories activity
+                                Intent intent = new Intent(getApplicationContext(), CategoriesActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } break;
+                            default: break;
+                        }
 
                         return true;
                     }
@@ -74,5 +95,8 @@ public abstract class DrawerActivity extends ParentActivity {
 
     // Get the layout of extending class, that will be inflated
     protected abstract int getChildLayoutResourceId();
+
+    // Get id to highlight correct value in nav drawer
+    protected abstract int getMenuItemId();
 
 }

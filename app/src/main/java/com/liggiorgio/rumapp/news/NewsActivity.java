@@ -5,7 +5,6 @@
 package com.liggiorgio.rumapp.news;
 
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -23,9 +22,6 @@ public class NewsActivity extends DrawerActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Highlight the item from the navigation drawer
-        ((NavigationView) findViewById(R.id.navigation_view)).getMenu().getItem(0).setChecked(true);
 
         // Reference the RecycleView
         newsRecyclerView = findViewById(R.id.news_list);
@@ -52,6 +48,11 @@ public class NewsActivity extends DrawerActivity {
     @Override
     protected int getChildLayoutResourceId() {
         return R.layout.activity_news;
+    }
+
+    @Override
+    protected int getMenuItemId() {
+        return 0;
     }
 
     // Placeholder function

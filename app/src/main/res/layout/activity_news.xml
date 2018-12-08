@@ -1,43 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
+<android.support.v7.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/drawer_layout"
+        android:id="@+id/news_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-
-    <!-- Main activity -->
-    <LinearLayout
-            android:id="@+id/content_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-        <!-- Toolbar -->
-        <include layout="@layout/toolbar"/>
-
-        <!-- Content -->
-        <android.support.v7.widget.RecyclerView
-                android:id="@+id/news_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical"
-                android:scrollbarSize="5dp"
-                android:scrollbarThumbVertical="@android:color/darker_gray">
-        </android.support.v7.widget.RecyclerView>
-
-    </LinearLayout>
-
-    <!-- Navigation drawer -->
-    <android.support.design.widget.NavigationView
-            android:id="@+id/navigation_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:theme="@style/ThemeOverlay.AppCompat.Light"
-            android:fitsSystemWindows="true"
-            app:headerLayout="@layout/drawer_header"
-            app:menu="@menu/drawer_entries"/>
-
-</android.support.v4.widget.DrawerLayout>
+        android:scrollbars="vertical"
+        android:scrollbarSize="5dp"
+        android:scrollbarThumbVertical="@android:color/darker_gray">
+</android.support.v7.widget.RecyclerView>

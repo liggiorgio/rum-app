@@ -25,4 +25,5 @@ public abstract class ParentActivity extends AppCompatActivity {
 
     // Get the child layout to apply
     protected abstract int getLayoutResourceId();
+
 }

@@ -50,7 +50,7 @@ public class NewsActivity extends DrawerActivity {
     }
 
     @Override
-    protected int getLayoutResourceId() {
+    protected int getChildLayoutResourceId() {
         return R.layout.activity_news;
     }
 

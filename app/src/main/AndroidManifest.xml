@@ -34,6 +34,10 @@
                 android:name=".conts.ContactsActivity"
                 android:label="@string/title_contacts">
         </activity>
+        <activity
+                android:name=".places.PlacesActivity"
+                android:label="@string/title_places">
+        </activity>
     </application>
 
 </manifest>

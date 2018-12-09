@@ -19,6 +19,7 @@ import com.liggiorgio.rumapp.about.AboutActivity;
 import com.liggiorgio.rumapp.cats.CategoriesActivity;
 import com.liggiorgio.rumapp.conts.ContactsActivity;
 import com.liggiorgio.rumapp.news.NewsActivity;
+import com.liggiorgio.rumapp.places.PlacesActivity;
 
 public abstract class DrawerActivity extends ParentActivity {
 
@@ -71,14 +72,20 @@ public abstract class DrawerActivity extends ParentActivity {
                                 finish();
                             } break;
                             case R.id.action_about: {
-                                // Go to categories activity
+                                // Go to about activity
                                 Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
                                 startActivity(intent);
                                 finish();
                             } break;
                             case R.id.action_contacts: {
-                                // Go to categories activity
+                                // Go to contacts activity
                                 Intent intent = new Intent(getApplicationContext(), ContactsActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } break;
+                            case R.id.action_places: {
+                                // Go to places activity
+                                Intent intent = new Intent(getApplicationContext(), PlacesActivity.class);
                                 startActivity(intent);
                                 finish();
                             } break;

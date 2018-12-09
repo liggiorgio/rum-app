@@ -9,8 +9,8 @@
                 android:title="@string/title_news"/>
         <item
                 android:id="@+id/action_cats"
-                android:icon="@drawable/ic_action_cats"
-                android:title="@string/title_cats"/>
+                android:icon="@drawable/ic_action_categories"
+                android:title="@string/title_categories"/>
     </group>
     <group
             android:id="@+id/group_more"
@@ -19,5 +19,9 @@
                 android:id="@+id/action_about"
                 android:icon="@drawable/ic_action_about"
                 android:title="@string/title_about"/>
+        <item
+                android:id="@+id/action_contacts"
+                android:icon="@drawable/ic_action_contacts"
+                android:title="@string/title_contacts"/>
     </group>
 </menu>

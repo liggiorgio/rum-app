@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import com.liggiorgio.rumapp.about.AboutActivity;
 import com.liggiorgio.rumapp.cats.CategoriesActivity;
+import com.liggiorgio.rumapp.conts.ContactsActivity;
 import com.liggiorgio.rumapp.news.NewsActivity;
 
 public abstract class DrawerActivity extends ParentActivity {
@@ -72,6 +73,12 @@ public abstract class DrawerActivity extends ParentActivity {
                             case R.id.action_about: {
                                 // Go to categories activity
                                 Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } break;
+                            case R.id.action_contacts: {
+                                // Go to categories activity
+                                Intent intent = new Intent(getApplicationContext(), ContactsActivity.class);
                                 startActivity(intent);
                                 finish();
                             } break;

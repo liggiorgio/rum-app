@@ -24,11 +24,16 @@
         </activity>
         <activity
                 android:name=".cats.CategoriesActivity"
-                android:label="@string/title_cats">
+                android:label="@string/title_categories">
         </activity>
         <activity
                 android:name=".about.AboutActivity"
-                android:label="@string/title_about"/>
+                android:label="@string/title_about">
+        </activity>
+        <activity
+                android:name=".conts.ContactsActivity"
+                android:label="@string/title_contacts">
+        </activity>
     </application>
 
 </manifest>

@@ -1,10 +1,10 @@
-package com.liggiorgio.rumapp.about;
+package com.liggiorgio.rumapp.conts;
 
 import android.os.Bundle;
 import com.liggiorgio.rumapp.DrawerActivity;
 import com.liggiorgio.rumapp.R;
 
-public class AboutActivity extends DrawerActivity {
+public class ContactsActivity extends DrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,11 +15,11 @@ public class AboutActivity extends DrawerActivity {
 
     @Override
     protected int getChildLayoutResourceId() {
-        return R.layout.activity_about;
+        return R.layout.activity_contacts;
     }
 
     @Override
     protected int getMenuItemId() {
-        return 2;
+        return 3;
     }
 }

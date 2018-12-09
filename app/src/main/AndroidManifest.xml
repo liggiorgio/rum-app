@@ -26,6 +26,9 @@
                 android:name=".cats.CategoriesActivity"
                 android:label="@string/title_cats">
         </activity>
+        <activity
+                android:name=".about.AboutActivity"
+                android:label="@string/title_about"/>
     </application>
 
 </manifest>

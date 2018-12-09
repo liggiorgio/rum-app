@@ -7,6 +7,7 @@
     <!-- Activities & drawer -->
     <string name="title_news">Home</string>
     <string name="title_cats">Categorie</string>
+    <string name="title_about">Chi siamo</string>
 
     <!-- Menus -->
     <string name="string_settings">Impostazioni</string>

@@ -38,6 +38,10 @@
                 android:name=".places.PlacesActivity"
                 android:label="@string/title_places">
         </activity>
+        <activity
+                android:name=".help.HelpActivity"
+                android:label="@string/title_help">
+        </activity>
     </application>
 
 </manifest>

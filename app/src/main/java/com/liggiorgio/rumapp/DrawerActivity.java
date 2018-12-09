@@ -19,6 +19,7 @@ import com.liggiorgio.rumapp.about.AboutActivity;
 import com.liggiorgio.rumapp.cats.CategoriesActivity;
 import com.liggiorgio.rumapp.conts.ContactsActivity;
 import com.liggiorgio.rumapp.help.HelpActivity;
+import com.liggiorgio.rumapp.info.InfoActivity;
 import com.liggiorgio.rumapp.news.NewsActivity;
 import com.liggiorgio.rumapp.places.PlacesActivity;
 
@@ -93,6 +94,12 @@ public abstract class DrawerActivity extends ParentActivity {
                             case R.id.action_help: {
                                 // Go to FAQ activity
                                 Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } break;
+                            case R.id.action_info: {
+                                // Go to info activity
+                                Intent intent = new Intent(getApplicationContext(), InfoActivity.class);
                                 startActivity(intent);
                                 finish();
                             } break;

@@ -67,7 +67,7 @@ public abstract class DrawerActivity extends ParentActivity {
                                 startActivity(intent);
                                 finish();
                             } break;
-                            case R.id.action_cats: {
+                            case R.id.action_categories: {
                                 // Go to categories activity
                                 Intent intent = new Intent(getApplicationContext(), CategoriesActivity.class);
                                 startActivity(intent);

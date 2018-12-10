@@ -11,10 +11,10 @@ import android.view.Menu;
 import com.liggiorgio.rumapp.DrawerActivity;
 import com.liggiorgio.rumapp.R;
 
+import java.util.ArrayList;
+
 public class NewsActivity extends DrawerActivity {
 
-    // TODO: create ViewModel to fetch remote news
-    private String[] newsSet = createDataset();
     private RecyclerView newsRecyclerView;
     private RecyclerView.LayoutManager newsLayoutManager;
     private RecyclerView.Adapter newsAdapter;
@@ -22,6 +22,12 @@ public class NewsActivity extends DrawerActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Create dataset
+        ArrayList<Item> newsList = new ArrayList<>();
+
+        // Fake fill dataset
+        datasetFill(newsList);
 
         // Reference the RecycleView
         newsRecyclerView = findViewById(R.id.news_list);
@@ -34,8 +40,23 @@ public class NewsActivity extends DrawerActivity {
         newsRecyclerView.setLayoutManager(newsLayoutManager);
 
         // Adapter for items in the list
-        newsAdapter = new NewsAdapter(newsSet);
+        newsAdapter = new NewsAdapter(newsList);
         newsRecyclerView.setAdapter(newsAdapter);
+
+    }
+
+    private void datasetFill(ArrayList<Item> newsList) {
+        // Header
+        newsList.add(new SectionItem("In evidenza"));
+
+        // State Name
+        newsList.add(new NewsItem("Notizia in evidenza"));
+
+        // Header
+        newsList.add(new SectionItem("Ultime news"));
+        // State Name
+        for (int i=0; i<10; i++)
+            newsList.add(new NewsItem("Notizia " + (i+1)));
     }
 
     @Override
@@ -55,14 +76,4 @@ public class NewsActivity extends DrawerActivity {
         return 0;
     }
 
-    // Placeholder function
-    private String[] createDataset() {
-        return new String[] {
-                "Titolo", "Titolo", "Titolo",
-                "Titolo", "Titolo", "Titolo",
-                "Titolo", "Titolo", "Titolo",
-                "Titolo", "Titolo", "Titolo",
-                "Titolo", "Titolo", "Titolo",
-        };
-    }
 }

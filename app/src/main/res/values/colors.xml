@@ -6,8 +6,9 @@
     <color name="colorPrimaryDark">#AF0827</color> <!-- or B40928 ? -->
     <color name="colorAccent">#FF4081</color>
 
-    <color name="colorBackground">#F4F4F4</color>
+    <color name="colorBackground">#E9EBEE</color>
     <color name="colorForeground">#FFFFFF</color>
 
-    <color name="colorTextPrimary">#FFFFFF</color>
+    <color name="colorSection">#DCDCDC</color>
+    <color name="colorTextSection">#737373</color>
 </resources>

@@ -32,6 +32,10 @@ public class NewsActivity extends DrawerActivity {
         // Reference the RecycleView
         newsRecyclerView = findViewById(R.id.news_list);
 
+        // Add decorator
+        RecyclerView.ItemDecoration dividerItemDecoration = new DividerItemDecoration(getResources().getDrawable(R.drawable.line_divider));
+        newsRecyclerView.addItemDecoration(dividerItemDecoration);
+
         // RecyclerView layout never resize
         newsRecyclerView.setHasFixedSize(true);
 

@@ -61,7 +61,7 @@ public abstract class DrawerActivity extends ParentActivity {
                     // TODO: Add code here to update the UI based on the item selected
                     // For example, swap UI fragments here
                     switch (menuItem.getItemId()) {
-                        case R.id.action_home: {
+                        case R.id.action_news: {
                             // Go to home activity
                             Intent intent = new Intent(getApplicationContext(), NewsActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

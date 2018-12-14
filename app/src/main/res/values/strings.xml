@@ -5,7 +5,7 @@
     <string name="company_name">Rete Universitaria Mediterranea</string>
 
     <!-- Activities & drawer -->
-    <string name="title_news">Home</string>
+    <string name="title_news">Notizie</string>
     <string name="title_categories">Categorie</string>
     <string name="title_about">Chi siamo</string>
 

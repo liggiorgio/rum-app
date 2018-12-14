@@ -4,8 +4,8 @@
             android:id="@+id/group_main"
             android:checkableBehavior="single">
         <item
-                android:id="@+id/action_home"
-                android:icon="@drawable/ic_action_home"
+                android:id="@+id/action_news"
+                android:icon="@drawable/ic_action_news"
                 android:title="@string/title_news"/>
         <item
                 android:id="@+id/action_categories"

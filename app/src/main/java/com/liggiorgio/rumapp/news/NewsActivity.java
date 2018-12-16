@@ -4,6 +4,7 @@
 
 package com.liggiorgio.rumapp.news;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,11 +24,18 @@ public class NewsActivity extends DrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Create dataset
+        // News list dataset
         ArrayList<Item> newsList = new ArrayList<>();
 
-        // Fake fill dataset
-        datasetFill(newsList);
+        // Create view model for news list
+        NewsViewModel model = ViewModelProviders.of(this).get(NewsViewModel.class);
+        model.getNews().observe(this, news -> {
+            // Update UI
+            newsList.clear();
+            assert news != null;
+            newsList.addAll(news);
+            newsAdapter.notifyDataSetChanged();
+        });
 
         // Reference the RecycleView
         newsRecyclerView = findViewById(R.id.news_list);
@@ -47,20 +55,6 @@ public class NewsActivity extends DrawerActivity {
         newsAdapter = new NewsAdapter(newsList);
         newsRecyclerView.setAdapter(newsAdapter);
 
-    }
-
-    private void datasetFill(ArrayList<Item> newsList) {
-        // Header
-        newsList.add(new SectionItem("In evidenza"));
-
-        // State Name
-        newsList.add(new NewsItem("Notizia in evidenza"));
-
-        // Header
-        newsList.add(new SectionItem("Ultime news"));
-        // State Name
-        for (int i=0; i<10; i++)
-            newsList.add(new NewsItem("Notizia " + (i+1)));
     }
 
     @Override

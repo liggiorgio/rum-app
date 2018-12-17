@@ -31,7 +31,7 @@ public class NewsActivity extends DrawerActivity {
         NewsViewModel model = ViewModelProviders.of(this).get(NewsViewModel.class);
         model.getNews().observe(this, news -> {
             // Update UI
-            newsList.clear();
+            //newsList.clear();
             assert news != null;
             newsList.addAll(news);
             newsAdapter.notifyDataSetChanged();

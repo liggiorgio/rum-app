@@ -10,48 +10,32 @@ import java.util.List;
 public class NewsViewModel extends ViewModel implements AsyncResponse {
 
     private ArrayList<Item> allNews;
-    private MutableLiveData<List<Item>> allNewsLive;
+    private MutableLiveData<List<Item>> latestNews;
+    private int page = 1;
 
     public LiveData<List<Item>> getNews() {
-        if (allNewsLive == null) {
+        if (latestNews == null) {
             allNews = new ArrayList<>();
-            allNewsLive = new MutableLiveData<>();
+            latestNews = new MutableLiveData<>();
             loadNews();
         }
-        return allNewsLive;
+        return latestNews;
     }
 
-    private void loadNews() {
-        // Do an asynchronous operation to fetch all news.
-        List<Item> updateList = new ArrayList<>();
-        String[] titles;
-
-        // Get allNewsLive
-        String url = "http://www.reteuniversitariamediterranea.it/page/1/?s";
+    void loadNews() {
+        // Get news
+        String url = "http://www.reteuniversitariamediterranea.it/page/" + page +"/?s";
+        page++;
         new HttpAsyncTask(this).execute(url);
-
-        /*/ Header
-        updateList.add(new SectionItem("In evidenza"));
-
-        // State Name
-        updateList.add(new NewsItem("Notizia in evidenza"));
-
-        // Header
-        updateList.add(new SectionItem("Ultime allNewsLive"));
-        // State Name
-        for (int i=0; i<10; i++)
-            updateList.add(new NewsItem("Notizia " + (i+1)));
-
-        // Update list
-        allNewsLive.setValue(updateList);*/
     }
 
     @Override
     public void processFinish(ArrayList<String> output) {
+        //allNews.clear();
         for (String aResult : output)
             allNews.add(new NewsItem(aResult));
 
         // Update list
-        allNewsLive.setValue(allNews);
+        latestNews.setValue(allNews);
     }
 }

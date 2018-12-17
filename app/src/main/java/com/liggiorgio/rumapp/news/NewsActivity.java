@@ -19,6 +19,8 @@ public class NewsActivity extends DrawerActivity {
     private RecyclerView newsRecyclerView;
     private RecyclerView.LayoutManager newsLayoutManager;
     private RecyclerView.Adapter newsAdapter;
+    private NewsViewModel model;
+    private EndlessRecyclerViewScrollListener scrollListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +30,10 @@ public class NewsActivity extends DrawerActivity {
         ArrayList<Item> newsList = new ArrayList<>();
 
         // Create view model for news list
-        NewsViewModel model = ViewModelProviders.of(this).get(NewsViewModel.class);
+        model = ViewModelProviders.of(this).get(NewsViewModel.class);
         model.getNews().observe(this, news -> {
             // Update UI
-            //newsList.clear();
+            newsList.clear();
             assert news != null;
             newsList.addAll(news);
             newsAdapter.notifyDataSetChanged();
@@ -54,6 +56,16 @@ public class NewsActivity extends DrawerActivity {
         // Adapter for items in the list
         newsAdapter = new NewsAdapter(newsList);
         newsRecyclerView.setAdapter(newsAdapter);
+
+        // Enable infinite scrolling
+        scrollListener = new EndlessRecyclerViewScrollListener((LinearLayoutManager) newsLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                // Load more news while scrolling
+                model.loadNews();
+            }
+        };
+        newsRecyclerView.addOnScrollListener(scrollListener);
 
     }
 

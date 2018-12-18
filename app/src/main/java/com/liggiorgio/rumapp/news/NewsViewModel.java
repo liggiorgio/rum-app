@@ -22,19 +22,23 @@ public class NewsViewModel extends ViewModel implements AsyncResponse {
         return latestNews;
     }
 
+    // Get latest news
     void loadNews() {
-        // Get news
         String url = "http://www.reteuniversitariamediterranea.it/page/" + page +"/?s";
         page++;
-        new HttpAsyncTask(this).execute(url);
+        new NewsFetchAsyncTask(this).execute(url);
     }
 
+    // Add fetched news to current list, or add placeholders
+    // if no internet connection is available
     @Override
-    public void processFinish(ArrayList<String> output) {
-        //allNews.clear();
-        for (String aResult : output)
-            allNews.add(new NewsItem(aResult));
-
+    public void processFinish(ArrayList<Item> output) {
+        if (output.size() > 0) {
+            allNews.addAll(output);
+        } else {
+            for (int i=0; i<5; i++)
+                allNews.add(new NewsItem(null,null,"Notizia " + (i+1+(page-2)*5),"Adesso","Testo."));
+        }
         // Update list
         latestNews.setValue(allNews);
     }

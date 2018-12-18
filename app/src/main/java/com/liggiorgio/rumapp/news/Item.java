@@ -8,4 +8,9 @@ public interface Item {
     // Title
     String getTitle();
 
+    // Publish date
+    String getDate();
+
+    // Content
+    String getText();
 }

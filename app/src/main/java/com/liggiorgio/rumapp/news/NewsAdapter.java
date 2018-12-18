@@ -5,10 +5,10 @@
 package com.liggiorgio.rumapp.news;
 
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.liggiorgio.rumapp.R;
 
@@ -22,8 +22,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     // you provide access to all the views for a data item in a view holder
     static class NewsViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        LinearLayout mTextView;
-        NewsViewHolder(LinearLayout v) {
+        ConstraintLayout mTextView;
+        NewsViewHolder(ConstraintLayout v) {
             super(v);
             mTextView = v;
         }
@@ -39,11 +39,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     @Override
     public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Create a new view
-        LinearLayout v;
+        ConstraintLayout v;
         if (viewType == 1)
-            v = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_section, parent, false);
+            v = (ConstraintLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_section, parent, false);
         else
-            v = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news, parent, false);
+            v = (ConstraintLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news, parent, false);
         return new NewsViewHolder(v);
     }
 
@@ -58,7 +58,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        ((TextView) holder.mTextView.getChildAt(0)).setText(newsDataset.get(position).getTitle());
+        ((TextView) holder.mTextView.getChildAt(1)).setText(newsDataset.get(position).getTitle());
+        ((TextView) holder.mTextView.getChildAt(2)).setText(newsDataset.get(position).getDate());
+        ((TextView) holder.mTextView.getChildAt(3)).setText(newsDataset.get(position).getText());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

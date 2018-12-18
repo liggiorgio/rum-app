@@ -12,6 +12,16 @@ public class SectionItem implements Item {
     }
 
     @Override
+    public String getDate() {
+        return null;
+    }
+
+    @Override
+    public String getText() {
+        return null;
+    }
+
+    @Override
     public int getType() {
         return 1;
     }

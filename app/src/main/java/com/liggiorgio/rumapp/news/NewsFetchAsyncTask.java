@@ -11,16 +11,17 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class HttpAsyncTask extends AsyncTask<String, Void, ArrayList<String>> {
+public class NewsFetchAsyncTask extends AsyncTask<String, Void, ArrayList<Item>> {
 
     private AsyncResponse delegate;
 
-    HttpAsyncTask(AsyncResponse delegate) {
+    NewsFetchAsyncTask(AsyncResponse delegate) {
         this.delegate = delegate;
     }
 
     @Override
-    protected ArrayList<String> doInBackground(String... urls) {
+    protected ArrayList<Item> doInBackground(String... urls) {
+        // Create URL for request
         URL url;
         try {
             url = new URL(urls[0]);
@@ -28,7 +29,9 @@ public class HttpAsyncTask extends AsyncTask<String, Void, ArrayList<String>> {
             e.printStackTrace();
             return new ArrayList<>();
         }
-        HttpURLConnection urlConnection = null;
+
+        // Establish connection
+        HttpURLConnection urlConnection;
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
@@ -38,8 +41,10 @@ public class HttpAsyncTask extends AsyncTask<String, Void, ArrayList<String>> {
             e.printStackTrace();
             return new ArrayList<>();
         }
+
+        // Read result
         BufferedReader in;
-        StringBuilder reply = null;
+        StringBuilder reply;
         try {
             InputStream is = new BufferedInputStream(urlConnection.getInputStream());
             in = new BufferedReader(new InputStreamReader(is));
@@ -56,31 +61,27 @@ public class HttpAsyncTask extends AsyncTask<String, Void, ArrayList<String>> {
             urlConnection.disconnect();
         }
 
-        // Get content items
+        // Get items from content
         String start = "<div class=\"category_column_element";
         String end = "<!-- category_column_element -->";
 
         String content = reply.substring(reply.indexOf(start), reply.lastIndexOf(end));
-        content = StringEscapeUtils.unescapeHtml3(content.replaceAll("\\s+", " ").replaceAll("> <", "><"));
+        content = StringEscapeUtils.unescapeHtml4(content.replaceAll("\\s+", " ").replaceAll("> <", "><"));
         String[] elements = content.split(end);
 
-        //System.out.println(content);
-
-        //System.out.println("News found: " + elements.length + "\n");
-
-        ArrayList<String> result = new ArrayList<>();
+        ArrayList<Item> result = new ArrayList<>();
 
         // Convert to single allNewsLive
         for (String element : elements) {
+
+            // Link - Title - Timestamp - Text //
             Pattern pattern = Pattern.compile("<h3.*><a\\shref=\"(.*?)\".*>(.*?)</a></h3>.*<div.*>(.*?)\\sin.*<p>(.*?)</p>");
             Matcher matcher = pattern.matcher(element);
             if (matcher.find()) {
-                result.add(matcher.group(2).trim());
+                result.add(new NewsItem(null,matcher.group(1).trim(),matcher.group(2).trim(),matcher.group(3).trim(),matcher.group(4).trim()));
                 //System.out.println(matcher.group(1).trim());
                 //System.out.println(matcher.group(3).trim());
                 //System.out.println(matcher.group(4).trim());
-            } else {
-                System.out.println("No matches");
             }
             /*pattern = Pattern.compile("<img.*src=\"//(.*?)\".*>");
             matcher = pattern.matcher(element);
@@ -95,7 +96,7 @@ public class HttpAsyncTask extends AsyncTask<String, Void, ArrayList<String>> {
     }
 
     @Override
-    protected void onPostExecute(ArrayList<String> result) {
+    protected void onPostExecute(ArrayList<Item> result) {
         delegate.processFinish(result);
     }
 

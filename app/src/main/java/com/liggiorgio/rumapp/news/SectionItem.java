@@ -1,6 +1,6 @@
 package com.liggiorgio.rumapp.news;
 
-public class SectionItem implements Item {
+public abstract class SectionItem implements Item {
     private final String title;
 
     SectionItem(String title) {

@@ -15,5 +15,6 @@
     <string name="title_places">Dove studiare</string>
     <string name="title_help">Domande frequenti</string>
     <string name="title_info">Informazioni</string>
+    <string name="key_news_list">com.liggiorgio.rumapp.KEY_NEWS_LIST</string>
 
 </resources>

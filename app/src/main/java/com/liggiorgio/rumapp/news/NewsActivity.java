@@ -5,6 +5,8 @@
 package com.liggiorgio.rumapp.news;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,9 +15,12 @@ import com.liggiorgio.rumapp.DrawerActivity;
 import com.liggiorgio.rumapp.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 
 public class NewsActivity extends DrawerActivity {
 
+    private ArrayList<Item> newsList;
     private RecyclerView newsRecyclerView;
     private RecyclerView.LayoutManager newsLayoutManager;
     private RecyclerView.Adapter newsAdapter;
@@ -27,14 +32,13 @@ public class NewsActivity extends DrawerActivity {
         super.onCreate(savedInstanceState);
 
         // News list dataset
-        ArrayList<Item> newsList = new ArrayList<>();
+        newsList = new ArrayList<>();
 
         // Create view model for news list
         model = ViewModelProviders.of(this).get(NewsViewModel.class);
         model.getNews().observe(this, news -> {
             // Update UI
             newsList.clear();
-            assert news != null;
             newsList.addAll(news);
             newsAdapter.notifyDataSetChanged();
         });
@@ -62,11 +66,30 @@ public class NewsActivity extends DrawerActivity {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 // Load more news while scrolling
-                model.loadNews();
+                model.fetchNews();
             }
         };
+
         newsRecyclerView.addOnScrollListener(scrollListener);
 
+        // Load previously fetched news
+        model.pushList(loadList());
+
+    }
+
+    // Load previously stored news, if any
+    private ArrayList<Item> loadList() {
+        SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
+        HashSet<String> myHash = (HashSet<String>) prefs.getStringSet(getResources().getString(R.string.key_news_list), new HashSet<>());
+        ArrayList<String> mySet = new ArrayList<>(myHash);
+        Collections.sort(mySet);
+        ArrayList<Item> news = new ArrayList<>();
+        String[] temp;
+        for (String s : mySet) {
+            temp = s.split("§");
+            news.add(new NewsItem(temp[1],temp[2],temp[3],temp[4],temp[5]));
+        }
+        return news;
     }
 
     @Override
@@ -74,6 +97,20 @@ public class NewsActivity extends DrawerActivity {
         // Inflate the menu
         getMenuInflater().inflate(R.menu.news_menu, menu);
         return true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        HashSet<String> mySet = new HashSet<>();
+        int c = 0;
+        for (Item i : newsList) {
+            mySet.add((c++) + "§" + i.getImage() + "§" + i.getRef() + "§" + i.getTitle() + "§" + i.getDate() + "§" + i.getText());
+        }
+        editor.putStringSet(getResources().getString(R.string.key_news_list), mySet);
+        editor.apply();
     }
 
     @Override

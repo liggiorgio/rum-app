@@ -12,21 +12,29 @@ public class NewsViewModel extends ViewModel implements AsyncResponse {
     private ArrayList<Item> allNews;
     private MutableLiveData<List<Item>> latestNews;
     private int page = 1;
+    private boolean offline = false;
 
     public LiveData<List<Item>> getNews() {
         if (latestNews == null) {
             allNews = new ArrayList<>();
             latestNews = new MutableLiveData<>();
-            loadNews();
+            fetchNews();
         }
         return latestNews;
     }
 
     // Get latest news
-    void loadNews() {
+    void fetchNews() {
         String url = "http://www.reteuniversitariamediterranea.it/page/" + page +"/?s";
         page++;
         new NewsFetchAsyncTask(this).execute(url);
+    }
+
+    // Receive an offline set of data
+    void pushList(ArrayList<Item> stored) {
+        offline = true;
+        allNews.addAll(stored);
+        latestNews.setValue(allNews);
     }
 
     // Add fetched news to current list, or add placeholders
@@ -34,12 +42,12 @@ public class NewsViewModel extends ViewModel implements AsyncResponse {
     @Override
     public void processFinish(ArrayList<Item> output) {
         if (output.size() > 0) {
+            if (offline) {
+                allNews.clear();
+                offline = false;
+            }
             allNews.addAll(output);
-        } else {
-            for (int i=0; i<5; i++)
-                allNews.add(new NewsItem(null,null,"Notizia " + (i+1+(page-2)*5),"Adesso","Testo."));
+            latestNews.setValue(allNews);
         }
-        // Update list
-        latestNews.setValue(allNews);
     }
 }

@@ -17,6 +17,21 @@ public class NewsItem implements Item {
     }
 
     @Override
+    public int getType() {
+        return 0;
+    }
+
+    @Override
+    public String getImage() {
+        return image;
+    }
+
+    @Override
+    public String getRef() {
+        return ref;
+    }
+
+    @Override
     public String getTitle() {
         return title;
     }
@@ -29,10 +44,5 @@ public class NewsItem implements Item {
     @Override
     public String getText() {
         return text;
-    }
-
-    @Override
-    public int getType() {
-        return 0;
     }
 }

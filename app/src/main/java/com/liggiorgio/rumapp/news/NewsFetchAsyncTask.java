@@ -69,27 +69,31 @@ public class NewsFetchAsyncTask extends AsyncTask<String, Void, ArrayList<Item>>
         content = StringEscapeUtils.unescapeHtml4(content.replaceAll("\\s+", " ").replaceAll("> <", "><"));
         String[] elements = content.split(end);
 
+        // Build single news items
         ArrayList<Item> result = new ArrayList<>();
+        Pattern pattern;
+        Matcher matcher;
+        String img, ref, title, date, text;
 
-        // Convert to single allNewsLive
         for (String element : elements) {
 
             // Link - Title - Timestamp - Text //
-            Pattern pattern = Pattern.compile("<h3.*><a\\shref=\"(.*?)\".*>(.*?)</a></h3>.*<div.*>(.*?)\\sin.*<p>(.*?)</p>");
-            Matcher matcher = pattern.matcher(element);
-            if (matcher.find()) {
-                result.add(new NewsItem(null,matcher.group(1).trim(),matcher.group(2).trim(),matcher.group(3).trim(),matcher.group(4).trim()));
-                //System.out.println(matcher.group(1).trim());
-                //System.out.println(matcher.group(3).trim());
-                //System.out.println(matcher.group(4).trim());
-            }
-            /*pattern = Pattern.compile("<img.*src=\"//(.*?)\".*>");
+            pattern = Pattern.compile("<h3.*><a\\shref=\"(.*?)\".*>(.*?)</a></h3>.*<div.*>(.*?)\\sin.*<p>(.*?)</p>");
             matcher = pattern.matcher(element);
-            if (matcher.find())
-                System.out.println("Thumbnail available: http://" + matcher.group(1));
-            else
-                System.out.println("No images attached");
-            System.out.println();*/
+            if (matcher.find()) {
+                // Save data to be wrapped
+                ref = matcher.group(1).trim();
+                title = matcher.group(2).trim();
+                date = matcher.group(3).trim();
+                text = matcher.group(4).trim();
+                pattern = Pattern.compile("<img.*src=\"//(.*?)\".*>");
+                matcher = pattern.matcher(element);
+                if (matcher.find())
+                    img = "http://" + matcher.group(1).trim();
+                else
+                    img = null;
+                result.add(new NewsItem(img, ref, title, date, text));
+            }
         }
 
         return result;

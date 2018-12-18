@@ -56,8 +56,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
         ((TextView) holder.mTextView.getChildAt(1)).setText(newsDataset.get(position).getTitle());
         ((TextView) holder.mTextView.getChildAt(2)).setText(newsDataset.get(position).getDate());
         ((TextView) holder.mTextView.getChildAt(3)).setText(newsDataset.get(position).getText());

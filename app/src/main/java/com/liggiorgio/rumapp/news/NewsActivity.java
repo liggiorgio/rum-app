@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
+import android.view.View;
 import com.liggiorgio.rumapp.DrawerActivity;
 import com.liggiorgio.rumapp.R;
 import org.apache.commons.lang3.StringUtils;
@@ -32,6 +33,9 @@ public class NewsActivity extends DrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Show progress bar at first start
+        findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+
         // News list dataset
         newsList = new ArrayList<>();
 
@@ -39,6 +43,8 @@ public class NewsActivity extends DrawerActivity {
         model = ViewModelProviders.of(this).get(NewsViewModel.class);
         model.getNews().observe(this, news -> {
             // Update UI
+            if (newsList.size() > 0)
+                findViewById(R.id.progressBar).setVisibility(View.GONE); // Hide progress bar
             newsList.clear();
             newsList.addAll(news);
             newsAdapter.notifyDataSetChanged();

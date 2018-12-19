@@ -8,6 +8,8 @@
         android:fitsSystemWindows="true">
 
     <!-- Main activity -->
+    <include layout="@layout/progressbar"
+    />
     <LinearLayout
             android:id="@+id/content_layout"
             android:layout_width="match_parent"
@@ -16,6 +18,8 @@
 
         <!-- Toolbar -->
         <include layout="@layout/toolbar"/>
+
+        <!-- Optional progress bar -->
 
         <!-- Content is inflated here -->
 

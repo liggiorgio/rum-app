@@ -2,13 +2,13 @@
 <resources>
     <color name="ic_launcher_background">#FFFFFF</color>
 
-    <color name="colorPrimary">#D70B30</color>
-    <color name="colorPrimaryDark">#AF0827</color> <!-- or B40928 ? -->
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#d70b30</color>
+    <color name="colorPrimaryDark">#af0827</color> <!-- or B40928 ? -->
+    <color name="colorAccent">#ff4081</color>
 
-    <color name="colorBackground">#E9EBEE</color>
-    <color name="colorForeground">#FFFFFF</color>
+    <color name="colorBackground">#e9ebee</color>
+    <color name="colorForeground">#ffffff</color>
 
-    <color name="colorSection">#DCDCDC</color>
+    <color name="colorSection">#dcdcdc</color>
     <color name="colorTextSection">#737373</color>
 </resources>

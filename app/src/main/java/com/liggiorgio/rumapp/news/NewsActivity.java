@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import com.liggiorgio.rumapp.DrawerActivity;
 import com.liggiorgio.rumapp.R;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -107,7 +108,7 @@ public class NewsActivity extends DrawerActivity {
         HashSet<String> mySet = new HashSet<>();
         int c = 0;
         for (Item i : newsList) {
-            mySet.add((c++) + "§" + i.getImage() + "§" + i.getRef() + "§" + i.getTitle() + "§" + i.getDate() + "§" + i.getText());
+            mySet.add(StringUtils.leftPad(String.valueOf(c++), 4, '0') + "§" + i.getImage() + "§" + i.getRef() + "§" + i.getTitle() + "§" + i.getDate() + "§" + i.getText());
         }
         editor.putStringSet(getResources().getString(R.string.key_news_list), mySet);
         editor.apply();

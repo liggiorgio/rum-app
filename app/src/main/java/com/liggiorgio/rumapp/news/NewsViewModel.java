@@ -12,7 +12,7 @@ public class NewsViewModel extends ViewModel implements AsyncResponse {
     private ArrayList<Item> allNews;
     private MutableLiveData<List<Item>> latestNews;
     private int page = 1;
-    private boolean offline = false;
+    private boolean firstLoad = true;
 
     public LiveData<List<Item>> getNews() {
         if (latestNews == null) {
@@ -32,7 +32,7 @@ public class NewsViewModel extends ViewModel implements AsyncResponse {
 
     // Receive an offline set of data
     void pushList(ArrayList<Item> stored) {
-        offline = true;
+        //firstLoad = false;
         allNews.addAll(stored);
         latestNews.setValue(allNews);
     }
@@ -42,9 +42,9 @@ public class NewsViewModel extends ViewModel implements AsyncResponse {
     @Override
     public void processFinish(ArrayList<Item> output) {
         if (output.size() > 0) {
-            if (offline) {
+            if (firstLoad) {
+                firstLoad = false;
                 allNews.clear();
-                offline = false;
             }
             allNews.addAll(output);
             latestNews.setValue(allNews);

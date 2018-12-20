@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.View;
@@ -64,6 +65,23 @@ public class NewsActivity extends DrawerActivity {
         // Linear layout manager for content management
         newsLayoutManager = new LinearLayoutManager(this);
         newsRecyclerView.setLayoutManager(newsLayoutManager);
+
+        // Set smooth scrolling for view
+        RecyclerView.SmoothScroller smoothScroller = new LinearSmoothScroller(getApplicationContext()) {
+            @Override protected int getVerticalSnapPreference() {
+                return LinearSmoothScroller.SNAP_TO_START;
+            }
+        };
+
+        // Enable title bar click to scroll view to top
+        findViewById(R.id.toolbar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Scroll to top
+                smoothScroller.setTargetPosition(0);
+                newsLayoutManager.startSmoothScroll(smoothScroller);
+            }
+        });
 
         // Adapter for items in the list
         newsAdapter = new NewsAdapter(newsList);

@@ -19,6 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 public class NewsActivity extends DrawerActivity {
 
@@ -111,10 +112,13 @@ public class NewsActivity extends DrawerActivity {
         super.onPause();
         SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        HashSet<String> mySet = new HashSet<>();
+        LinkedHashSet<String> mySet = new LinkedHashSet<>();
         int c = 0;
         for (Item i : newsList) {
             mySet.add(StringUtils.leftPad(String.valueOf(c++), 4, '0') + "§" + i.getImage() + "§" + i.getRef() + "§" + i.getTitle() + "§" + i.getDate() + "§" + i.getText());
+            // Limit capacity to prevent app crashes
+            if (c == 128)
+                break;
         }
         editor.putStringSet(getResources().getString(R.string.key_news_list), mySet);
         editor.apply();

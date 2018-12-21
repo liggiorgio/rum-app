@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NewsFetchAsyncTask extends AsyncTask<String, Void, ArrayList<Item>> {
+public class NewsFetchAsyncTask extends AsyncTask<String, Void, ArrayList<NewsItem>> {
 
     private AsyncResponse delegate;
 
@@ -20,7 +20,7 @@ public class NewsFetchAsyncTask extends AsyncTask<String, Void, ArrayList<Item>>
     }
 
     @Override
-    protected ArrayList<Item> doInBackground(String... urls) {
+    protected ArrayList<NewsItem> doInBackground(String... urls) {
         // Create URL for request
         URL url;
         try {
@@ -70,7 +70,7 @@ public class NewsFetchAsyncTask extends AsyncTask<String, Void, ArrayList<Item>>
         String[] elements = content.split(end);
 
         // Build single news items
-        ArrayList<Item> result = new ArrayList<>();
+        ArrayList<NewsItem> result = new ArrayList<>();
         Pattern pattern;
         Matcher matcher;
         String img, ref, title, date, text;
@@ -100,7 +100,7 @@ public class NewsFetchAsyncTask extends AsyncTask<String, Void, ArrayList<Item>>
     }
 
     @Override
-    protected void onPostExecute(ArrayList<Item> result) {
+    protected void onPostExecute(ArrayList<NewsItem> result) {
         delegate.processFinish(result);
     }
 

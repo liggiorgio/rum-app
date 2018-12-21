@@ -24,7 +24,7 @@ import java.util.LinkedHashSet;
 
 public class NewsActivity extends DrawerActivity {
 
-    private ArrayList<Item> newsList;
+    private ArrayList<NewsItem> newsList;
     private RecyclerView newsRecyclerView;
     private RecyclerView.LayoutManager newsLayoutManager;
     private RecyclerView.Adapter newsAdapter;
@@ -104,12 +104,12 @@ public class NewsActivity extends DrawerActivity {
     }
 
     // Load previously stored news, if any
-    private ArrayList<Item> loadList() {
+    private ArrayList<NewsItem> loadList() {
         SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
         HashSet<String> myHash = (HashSet<String>) prefs.getStringSet(getResources().getString(R.string.key_news_list), new HashSet<>());
         ArrayList<String> mySet = new ArrayList<>(myHash);
         Collections.sort(mySet);
-        ArrayList<Item> news = new ArrayList<>();
+        ArrayList<NewsItem> news = new ArrayList<>();
         String[] temp;
         for (String s : mySet) {
             temp = s.split("§");
@@ -132,8 +132,8 @@ public class NewsActivity extends DrawerActivity {
         SharedPreferences.Editor editor = prefs.edit();
         LinkedHashSet<String> mySet = new LinkedHashSet<>();
         int c = 0;
-        for (Item i : newsList) {
-            mySet.add(StringUtils.leftPad(String.valueOf(c++), 4, '0') + "§" + i.getImage() + "§" + i.getRef() + "§" + i.getTitle() + "§" + i.getDate() + "§" + i.getText());
+        for (NewsItem i : newsList) {
+            mySet.add(StringUtils.leftPad(String.valueOf(c++), 4, '0') + "§" + ((NewsItem)i).getImage() + "§" + ((NewsItem)i).getRef() + "§" + ((NewsItem)i).getTitle() + "§" + ((NewsItem)i).getDate() + "§" + ((NewsItem)i).getText());
             // Limit capacity to prevent app crashes
             if (c == 128)
                 break;

@@ -9,12 +9,12 @@ import java.util.List;
 
 public class NewsViewModel extends ViewModel implements AsyncResponse {
 
-    private ArrayList<Item> allNews;
-    private MutableLiveData<List<Item>> latestNews;
+    private ArrayList<NewsItem> allNews;
+    private MutableLiveData<List<NewsItem>> latestNews;
     private int page = 1;
     private boolean firstLoad = true;
 
-    public LiveData<List<Item>> getNews() {
+    public LiveData<List<NewsItem>> getNews() {
         if (latestNews == null) {
             allNews = new ArrayList<>();
             latestNews = new MutableLiveData<>();
@@ -31,7 +31,7 @@ public class NewsViewModel extends ViewModel implements AsyncResponse {
     }
 
     // Receive an offline set of data
-    void pushList(ArrayList<Item> stored) {
+    void pushList(ArrayList<NewsItem> stored) {
         //firstLoad = false;
         allNews.addAll(stored);
         latestNews.setValue(allNews);
@@ -40,7 +40,7 @@ public class NewsViewModel extends ViewModel implements AsyncResponse {
     // Add fetched news to current list, or add placeholders
     // if no internet connection is available
     @Override
-    public void processFinish(ArrayList<Item> output) {
+    public void processFinish(ArrayList<NewsItem> output) {
         if (output.size() > 0) {
             if (firstLoad) {
                 firstLoad = false;

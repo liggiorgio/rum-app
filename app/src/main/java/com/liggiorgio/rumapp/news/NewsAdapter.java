@@ -15,7 +15,7 @@ import com.liggiorgio.rumapp.R;
 import java.util.ArrayList;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
-    private ArrayList<Item> newsDataset;
+    private ArrayList<NewsItem> newsDataset;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -30,7 +30,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    NewsAdapter(ArrayList<Item> myDataset) {
+    NewsAdapter(ArrayList<NewsItem> myDataset) {
         newsDataset = myDataset;
     }
 

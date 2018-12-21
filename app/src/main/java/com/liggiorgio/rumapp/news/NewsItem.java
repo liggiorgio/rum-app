@@ -1,6 +1,6 @@
 package com.liggiorgio.rumapp.news;
 
-public class NewsItem implements Item {
+public class NewsItem {
 
     private final String image;
     private final String ref;
@@ -16,32 +16,26 @@ public class NewsItem implements Item {
         this.text = text;
     }
 
-    @Override
     public int getType() {
         return 0;
     }
 
-    @Override
     public String getImage() {
         return image;
     }
 
-    @Override
     public String getRef() {
         return ref;
     }
 
-    @Override
     public String getTitle() {
         return title;
     }
 
-    @Override
     public String getDate() {
         return date;
     }
 
-    @Override
     public String getText() {
         return text;
     }

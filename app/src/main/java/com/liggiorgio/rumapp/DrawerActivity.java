@@ -43,7 +43,7 @@ public abstract class DrawerActivity extends ParentActivity {
         actionbar.setDisplayHomeAsUpEnabled(true);
 
         if (getMenuItemId() == 0)
-            actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+            actionbar.setHomeAsUpIndicator(R.drawable.ic_action_menu);
 
         // Handle navigation click events
         drawerLayout = findViewById(R.id.drawer_layout);

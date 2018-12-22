@@ -73,26 +73,26 @@ public class NewsFetchAsyncTask extends AsyncTask<String, Void, ArrayList<NewsIt
         ArrayList<NewsItem> result = new ArrayList<>();
         Pattern pattern;
         Matcher matcher;
-        String img, ref, title, date, text;
+        String ref, title, date, text;
+        StringBuilder cats;
 
+        // Link - Title - Timestamp - Categories - Text
         for (String element : elements) {
-
-            // Link - Title - Timestamp - Text //
-            pattern = Pattern.compile("<h3.*><a\\shref=\"(.*?)\".*>(.*?)</a></h3>.*<div.*>(.*?)\\sin.*<p>(.*?)</p>");
+            pattern = Pattern.compile("<h3.*><a\\shref=\"(.*?)\".*>(.*?)</a></h3>.*<div.*>(.*?)\\sin\\s(<a.*</a>)</div>.*<p>(.*?)</p>");
             matcher = pattern.matcher(element);
             if (matcher.find()) {
                 // Save data to be wrapped
                 ref = matcher.group(1).trim();
                 title = matcher.group(2).trim();
                 date = matcher.group(3).trim();
-                text = matcher.group(4).trim();
-                pattern = Pattern.compile("<img.*src=\"//(.*?)\".*>");
-                matcher = pattern.matcher(element);
-                if (matcher.find())
-                    img = "http://" + matcher.group(1).trim();
-                else
-                    img = null;
-                result.add(new NewsItem(img, ref, title, date, text));
+                String[] cts = matcher.group(4).split(",");
+                cats = new StringBuilder(cts[0].replaceAll("</a>", "").replaceAll("<a.*>", "").trim());
+                for (int i=1; i<cts.length; i++) {
+                    cats.append(", ");
+                    cats.append(cts[i].replaceAll("</a>", "").replaceAll("<a.*>", "").trim());
+                }
+                text = matcher.group(5).trim();
+                result.add(new NewsItem(ref, title, date, cats.toString(), text));
             }
         }
 

@@ -9,6 +9,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.liggiorgio.rumapp.R;
 
@@ -21,11 +22,15 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     static class NewsViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        ConstraintLayout mTextView;
+        ImageView mImg;
+        TextView mTitle, mDate, mCats, mText;
         NewsViewHolder(ConstraintLayout v) {
             super(v);
-            mTextView = v;
+            mImg = (ImageView) v.getChildAt(0);
+            mTitle = (TextView) v.getChildAt(1);
+            mDate = (TextView) v.getChildAt(2);
+            mCats = (TextView) v.getChildAt(3);
+            mText = (TextView) v.getChildAt(4);
         }
     }
 
@@ -38,27 +43,20 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     @NonNull
     @Override
     public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Create a new view
+        // Create a news view
         ConstraintLayout v;
-        if (viewType == 1)
-            v = (ConstraintLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_section, parent, false);
-        else
-            v = (ConstraintLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news, parent, false);
+        v = (ConstraintLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news, parent, false);
         return new NewsViewHolder(v);
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        // Section or news?
-        return newsDataset.get(position).getType();
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-        ((TextView) holder.mTextView.getChildAt(1)).setText(newsDataset.get(position).getTitle());
-        ((TextView) holder.mTextView.getChildAt(2)).setText(newsDataset.get(position).getDate());
-        ((TextView) holder.mTextView.getChildAt(3)).setText(newsDataset.get(position).getText());
+        //holder.mImg.setImageDrawable();
+        holder.mTitle.setText(newsDataset.get(position).getTitle());
+        holder.mDate.setText(newsDataset.get(position).getDate());
+        holder.mCats.setText(newsDataset.get(position).getCategories());
+        holder.mText.setText(newsDataset.get(position).getText());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

@@ -133,7 +133,7 @@ public class NewsActivity extends DrawerActivity {
         LinkedHashSet<String> mySet = new LinkedHashSet<>();
         int c = 0;
         for (NewsItem i : newsList) {
-            mySet.add(StringUtils.leftPad(String.valueOf(c++), 4, '0') + "§" + ((NewsItem)i).getImage() + "§" + ((NewsItem)i).getRef() + "§" + ((NewsItem)i).getTitle() + "§" + ((NewsItem)i).getDate() + "§" + ((NewsItem)i).getText());
+            mySet.add(StringUtils.leftPad(String.valueOf(c++), 3, '0') + "§" + i.getRef() + "§" + i.getTitle() + "§" + i.getDate() + "§" + i.getCategories() + "§" + i.getText());
             // Limit capacity to prevent app crashes
             if (c == 128)
                 break;

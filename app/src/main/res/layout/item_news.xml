@@ -13,8 +13,8 @@
             android:layout_height="32dp"
             android:id="@+id/img"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:scaleType="center" android:background="@android:color/darker_gray"
-            app:srcCompat="@android:drawable/ic_menu_gallery"/>
+            android:scaleType="center"
+            android:contentDescription="@string/image_icon"/>
     <TextView
             android:id="@+id/title"
             android:layout_width="0dp"

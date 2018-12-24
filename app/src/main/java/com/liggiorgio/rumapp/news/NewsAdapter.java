@@ -52,7 +52,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-        //holder.mImg.setImageDrawable();
+        holder.mImg.setImageResource(newsDataset.get(position).getIcon());
         holder.mTitle.setText(newsDataset.get(position).getTitle());
         holder.mDate.setText(newsDataset.get(position).getDate());
         holder.mCats.setText(newsDataset.get(position).getCategories());

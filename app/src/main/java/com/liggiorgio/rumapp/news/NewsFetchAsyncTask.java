@@ -1,6 +1,7 @@
 package com.liggiorgio.rumapp.news;
 
 import android.os.AsyncTask;
+import com.liggiorgio.rumapp.R;
 import org.apache.commons.text.StringEscapeUtils;
 
 import java.io.*;
@@ -73,6 +74,7 @@ public class NewsFetchAsyncTask extends AsyncTask<String, Void, ArrayList<NewsIt
         ArrayList<NewsItem> result = new ArrayList<>();
         Pattern pattern;
         Matcher matcher;
+        int icon;
         String ref, title, date, text;
         StringBuilder cats;
 
@@ -92,11 +94,61 @@ public class NewsFetchAsyncTask extends AsyncTask<String, Void, ArrayList<NewsIt
                     cats.append(cts[i].replaceAll("</a>", "").replaceAll("<a.*>", "").trim());
                 }
                 text = matcher.group(5).trim();
-                result.add(new NewsItem(ref, title, date, cats.toString(), text));
+                icon = computeIcon(cats.toString());
+                result.add(new NewsItem(icon, ref, title, date, cats.toString(), text));
             }
         }
 
         return result;
+    }
+
+    private int computeIcon(String c) {
+        // No category
+        int flag = 0;
+        int res = R.drawable.ic_topic_uncategorized;
+
+        // General
+        if (c.contains("C.U.S."))
+            res = R.drawable.ic_topic_sport;
+        if (c.contains("Eventi"))
+            res = R.drawable.ic_topic_event;
+        if (c.contains("Bandi"))
+            res = R.drawable.ic_topic_announcement;
+        if (c.contains("Ateneo") || c.contains("Scuole"))
+            res = R.drawable.ic_topic_school;
+        if (c.contains("E.R.S.U."))
+            res = R.drawable.ic_topic_management;
+
+        // Departments
+        if (c.contains("Scienze di base e applicate")) {
+            res = R.drawable.ic_topic_science; flag++;
+        }
+        if (c.contains("Politecnica") || c.contains("Ingegneria")) {
+            res = R.drawable.ic_topic_engineering; flag++;
+        }
+        if (c.contains("Scienze giuridiche ed economico-sociali") || c.contains("Giurisprudenza")) {
+            res = R.drawable.ic_topic_law; flag++;
+        }
+        if (c.contains("Scienze umane e del patrimonio culturale")) {
+            res = R.drawable.ic_topic_humanities; flag++;
+        }
+        if (c.contains("Medicina e Chirurgia")) {
+            res = R.drawable.ic_topic_medicine; flag++;
+        }
+
+        // Characteristic c.contains("")
+        if (c.contains("Consiglio degli Studenti") || c.contains("Senato accademico") || (c.contains("Scuole") && (flag>1)))
+            res = R.drawable.ic_topic_school;
+        if (c.contains("Test di ammissione"))
+            res = R.drawable.ic_topic_exam;
+        if (c.contains("Accoglienza matricole"))
+            res = R.drawable.ic_topic_school;
+        if (c.contains("Consiglio di Amministrazione"))
+            res = R.drawable.ic_topic_management;
+        if (c.contains("In evidenza"))
+            res = R.drawable.ic_topic_featured;
+
+        return res;
     }
 
     @Override

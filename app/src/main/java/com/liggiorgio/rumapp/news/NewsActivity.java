@@ -113,7 +113,7 @@ public class NewsActivity extends DrawerActivity {
         String[] temp;
         for (String s : mySet) {
             temp = s.split("§");
-            news.add(new NewsItem(temp[1],temp[2],temp[3],temp[4],temp[5]));
+            news.add(new NewsItem(Integer.parseInt(temp[1]),temp[2],temp[3],temp[4],temp[5],temp[6]));
         }
         return news;
     }
@@ -133,7 +133,7 @@ public class NewsActivity extends DrawerActivity {
         LinkedHashSet<String> mySet = new LinkedHashSet<>();
         int c = 0;
         for (NewsItem i : newsList) {
-            mySet.add(StringUtils.leftPad(String.valueOf(c++), 3, '0') + "§" + i.getRef() + "§" + i.getTitle() + "§" + i.getDate() + "§" + i.getCategories() + "§" + i.getText());
+            mySet.add(StringUtils.leftPad(String.valueOf(c++), 3, '0') + "§" + i.getIcon() + "§" + i.getRef() + "§" + i.getTitle() + "§" + i.getDate() + "§" + i.getCategories() + "§" + i.getText());
             // Limit capacity to prevent app crashes
             if (c == 128)
                 break;

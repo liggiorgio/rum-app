@@ -10,31 +10,18 @@
     <!-- Main activity -->
     <include layout="@layout/progressbar"/>
 
-    <FrameLayout
+    <LinearLayout
+            android:id="@+id/content_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <LinearLayout
-                android:id="@+id/content_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+        <!-- Toolbar -->
+        <include layout="@layout/toolbar"/>
 
-            <!-- Toolbar -->
-            <include layout="@layout/toolbar"/>
+        <!-- Content is inflated here -->
 
-            <!-- Content is inflated here -->
-
-        </LinearLayout>
-
-        <!-- Toolbar Material Design casted shadow -->
-        <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:layout_marginTop="?attr/actionBarSize"
-                android:src="@drawable/toolbar_dropshadow"/>
-
-    </FrameLayout>
+    </LinearLayout>
 
     <!-- Navigation drawer -->
     <android.support.design.widget.NavigationView

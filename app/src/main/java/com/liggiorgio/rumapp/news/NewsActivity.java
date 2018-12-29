@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 import com.liggiorgio.rumapp.DrawerActivity;
 import com.liggiorgio.rumapp.R;
 import org.apache.commons.lang3.StringUtils;
@@ -96,7 +97,20 @@ public class NewsActivity extends DrawerActivity {
             }
         };
 
+        // Set up list view features
         newsRecyclerView.addOnScrollListener(scrollListener);
+
+        newsRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, newsRecyclerView, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Toast.makeText(NewsActivity.this, "Single Click on position: " + position, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+                Toast.makeText(NewsActivity.this, "Long press on position: " + position, Toast.LENGTH_LONG).show();
+            }
+        }));
 
         // Load previously fetched news
         model.pushList(loadList());

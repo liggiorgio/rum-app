@@ -77,13 +77,10 @@ public class NewsActivity extends DrawerActivity {
         };
 
         // Enable title bar click to scroll view to top
-        findViewById(R.id.toolbar).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Scroll to top
-                smoothScroller.setTargetPosition(0);
-                newsLayoutManager.startSmoothScroll(smoothScroller);
-            }
+        findViewById(R.id.toolbar).setOnClickListener(v -> {
+            // Scroll to top
+            smoothScroller.setTargetPosition(0);
+            newsLayoutManager.startSmoothScroll(smoothScroller);
         });
 
         // Adapter for items in the list

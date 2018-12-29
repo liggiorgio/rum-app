@@ -8,7 +8,6 @@ package com.liggiorgio.rumapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.GravityCompat;
@@ -50,9 +49,7 @@ public abstract class DrawerActivity extends ParentActivity {
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(
-            new NavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                menuItem -> {
                     // Set item as selected to persist highlight
                     menuItem.setChecked(true);
                     // Close drawer when item is tapped
@@ -107,8 +104,7 @@ public abstract class DrawerActivity extends ParentActivity {
                         default: break;
                     }
                     return true;
-                }
-            });
+                });
     }
 
     @Override

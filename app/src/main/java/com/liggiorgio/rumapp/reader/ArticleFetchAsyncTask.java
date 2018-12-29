@@ -70,7 +70,6 @@ public class ArticleFetchAsyncTask extends AsyncTask<String, Void, ArticleItem> 
         // Build single news items
         Pattern pattern;
         Matcher matcher;
-        int icon;
         String title, author, text;
         StringBuilder cats;
 

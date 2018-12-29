@@ -6,6 +6,7 @@ package com.liggiorgio.rumapp.news;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.Toast;
 import com.liggiorgio.rumapp.DrawerActivity;
 import com.liggiorgio.rumapp.R;
+import com.liggiorgio.rumapp.reader.ReaderActivity;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -103,7 +105,10 @@ public class NewsActivity extends DrawerActivity {
         newsRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, newsRecyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Toast.makeText(NewsActivity.this, "Single Click on position: " + position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(NewsActivity.this, "Single Click on position: " + position, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), ReaderActivity.class);
+                intent.putExtra("NUMBER", position);
+                startActivity(intent);
             }
 
             @Override

@@ -74,7 +74,7 @@ public class ArticleFetchAsyncTask extends AsyncTask<String, Void, ArticleItem> 
         StringBuilder cats;
 
         // Full article text is parsed
-        pattern = Pattern.compile("<h2.*>(.*?)</h2>.*<div class=\"author_wrapper.*>(.*?)\\sin\\s(<a.*</a>)</div>.*</div>(<p>.*?</p>)<div class=\"addtoany_share_save_container");
+        pattern = Pattern.compile("<h2.*>(.*?)</h2>.*<div class=\"author_wrapper.*>(.*?)\\sin\\s(<a.*</a>)</div>.*</fb:like></div></div>(.*?)<div class=\"addtoany_share_save_container");
         matcher = pattern.matcher(content);
         if (matcher.find()) {
             // Save data to be wrapped

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" android:gravity="center">
 
@@ -18,13 +18,13 @@
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:orientation="vertical"
-                      android:background="@color/colorForeground" android:padding="8dp"
+                      android:background="@color/colorForeground" android:padding="10dp"
                       android:id="@+id/reader_container">
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/reader_title"
-                    android:textColor="@color/colorPrimary" android:textSize="15sp" android:textStyle="bold"
-                    android:layout_marginBottom="4dp"/>
+                    android:textColor="@color/colorPrimary" android:textSize="18sp" android:textStyle="bold"
+                    android:layout_marginBottom="6dp"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/reader_author" android:textSize="12sp"
@@ -33,10 +33,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/reader_categories"
                     android:textColor="@color/colorAccent" android:textSize="12sp"/>
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" app:srcCompat="@drawable/line_divider"
+                    android:layout_marginTop="6dp" android:scaleType="fitXY" android:layout_marginBottom="6dp"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/reader_text"
-                    android:textColor="@android:color/black" android:layout_marginTop="4dp"/>
+                    android:textColor="@android:color/black" android:textSize="15sp"/>
         </LinearLayout>
 
     </ScrollView>

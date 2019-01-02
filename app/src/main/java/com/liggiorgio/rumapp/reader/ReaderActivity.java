@@ -64,6 +64,7 @@ public class ReaderActivity extends ParentActivity {
         }
         (findViewById(R.id.reader_text)).setClickable(true);
         ((TextView) findViewById(R.id.reader_text)).setMovementMethod(LinkMovementMethod.getInstance());
+        findViewById(R.id.reader_container).setVisibility(View.VISIBLE);
     }
 
     @Override

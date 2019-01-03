@@ -8,6 +8,7 @@
     <include layout="@layout/toolbar"/>
 
     <include layout="@layout/progressbar"/>
+    <include layout="@layout/no_connection"/>
 
     <ScrollView
             android:layout_width="match_parent"

@@ -9,6 +9,7 @@
 
     <!-- Main activity -->
     <include layout="@layout/progressbar"/>
+    <include layout="@layout/no_connection"/>
 
     <FrameLayout
             android:layout_width="match_parent"

@@ -8,6 +8,8 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSmoothScroller;
@@ -38,8 +40,18 @@ public class NewsActivity extends DrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Show progress bar at first start
-        findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+        // Check connectivity status
+        ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        if (!isConnected) {
+            findViewById(R.id.noConnection).setVisibility(View.VISIBLE);
+            notifyNoConnection();
+        } else {
+            // Show progress bar at first start
+            findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+        }
 
         // News list dataset
         newsList = new ArrayList<>();
@@ -48,8 +60,10 @@ public class NewsActivity extends DrawerActivity {
         model = ViewModelProviders.of(this).get(NewsViewModel.class);
         model.getNews().observe(this, news -> {
             // Update UI
-            if (newsList.size() > 0)
+            if (newsList.size() > 0) {
                 findViewById(R.id.progressBar).setVisibility(View.GONE); // Hide progress bar
+                findViewById(R.id.noConnection).setVisibility(View.GONE); // Hide warning message
+            }
             newsList.clear();
             newsList.addAll(news);
             newsAdapter.notifyDataSetChanged();
@@ -118,6 +132,11 @@ public class NewsActivity extends DrawerActivity {
         // Load previously fetched news
         model.pushList(loadList());
 
+    }
+
+    // Notify the user there's no network
+    private void notifyNoConnection() {
+        Toast.makeText(getApplicationContext(), "Nessuna connessione Internet", Toast.LENGTH_SHORT).show();
     }
 
     // Load previously stored news, if any

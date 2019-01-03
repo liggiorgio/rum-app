@@ -1,7 +1,10 @@
 package com.liggiorgio.rumapp.reader;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -10,6 +13,7 @@ import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.liggiorgio.rumapp.ParentActivity;
 import com.liggiorgio.rumapp.R;
 
@@ -33,8 +37,18 @@ public class ReaderActivity extends ParentActivity {
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setTitle(title);
 
-        // Show progress bar at first start
-        findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+        // Check connectivity status
+        ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        if (!isConnected) {
+            findViewById(R.id.noConnection).setVisibility(View.VISIBLE);
+            notifyNoConnection();
+        } else {
+            // Show progress bar at first start
+            findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+        }
 
         // Article article to show
         article = null;
@@ -49,6 +63,11 @@ public class ReaderActivity extends ParentActivity {
             article = item;
             updateView();
         });
+    }
+
+    // Notify the user there's no network
+    private void notifyNoConnection() {
+        Toast.makeText(getApplicationContext(), "Nessuna connessione Internet", Toast.LENGTH_SHORT).show();
     }
 
     @SuppressWarnings("deprecation")

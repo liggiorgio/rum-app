@@ -37,8 +37,7 @@ public class NewsViewModel extends ViewModel implements AsyncResponse {
         latestNews.setValue(allNews);
     }
 
-    // Add fetched news to current list, or add placeholders
-    // if no internet connection is available
+    // Add fetched news to current list
     @Override
     public void processFinish(ArrayList<NewsItem> output) {
         if (output.size() > 0) {

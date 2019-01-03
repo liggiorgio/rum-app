@@ -9,6 +9,7 @@
 
     <!-- Main activity -->
     <include layout="@layout/progressbar"/>
+    <include layout="@layout/no_connection"/>
 
     <LinearLayout
             android:id="@+id/content_layout"

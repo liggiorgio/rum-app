@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -21,6 +22,7 @@ public class ReaderActivity extends ParentActivity {
 
     private ArticleItem article;
     private ReaderViewModel model;
+    private String title, ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +30,8 @@ public class ReaderActivity extends ParentActivity {
 
         // Retrieve intent extras
         Intent intent = getIntent();
-        String title = intent.getStringExtra("TITLE");
-        String ref = intent.getStringExtra("REF");
+        title = intent.getStringExtra("TITLE");
+        ref = intent.getStringExtra("REF");
 
         // Enable home/up buttons, set title
         ActionBar actionbar = getSupportActionBar();
@@ -84,6 +86,32 @@ public class ReaderActivity extends ParentActivity {
         (findViewById(R.id.reader_text)).setClickable(true);
         ((TextView) findViewById(R.id.reader_text)).setMovementMethod(LinkMovementMethod.getInstance());
         findViewById(R.id.reader_container).setVisibility(View.VISIBLE);
+    }
+
+    // Read current article in the default browser
+    public void actionExternal(View v) {
+        Intent browserIntent = new Intent();
+        browserIntent.setAction(Intent.ACTION_VIEW);
+        browserIntent.setData(Uri.parse(ref));
+        if (browserIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(browserIntent);
+        } else {
+            Toast.makeText(getApplicationContext(), "Nessuna applicazione può eseguire l'azione", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // Share the current article with another app
+    public void actionShare(View v) {
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, title + ": " + ref);
+        shareIntent.setType("text/plain");
+        Intent shareChooser = Intent.createChooser(shareIntent, "Condividi link tramite");
+        if (shareChooser.resolveActivity(getPackageManager()) != null) {
+            startActivity(shareChooser);
+        } else {
+            Toast.makeText(getApplicationContext(), "Nessuna applicazione può eseguire l'azione", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

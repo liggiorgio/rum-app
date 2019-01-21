@@ -18,5 +18,7 @@
     <string name="key_news_list">com.liggiorgio.rumapp.KEY_NEWS_LIST</string>
     <string name="image_icon">Icona</string>
     <string name="loading">Caricamento...</string>
+    <string name="read_external">Leggi online</string>
+    <string name="read_share">Condividi</string>
 
 </resources>

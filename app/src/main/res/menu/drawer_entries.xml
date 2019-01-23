@@ -20,10 +20,6 @@
                 android:icon="@drawable/ic_action_about"
                 android:title="@string/title_about"/>
         <item
-                android:id="@+id/action_contacts"
-                android:icon="@drawable/ic_action_contacts"
-                android:title="@string/title_contacts"/>
-        <item
                 android:id="@+id/action_places"
                 android:icon="@drawable/ic_action_places"
                 android:title="@string/title_places"/>

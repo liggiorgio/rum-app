@@ -20,6 +20,6 @@ public class InfoActivity extends DrawerActivity {
 
     @Override
     protected int getMenuItemId() {
-        return 6;
+        return 5;
     }
 }

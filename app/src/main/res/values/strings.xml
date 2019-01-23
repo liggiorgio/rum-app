@@ -7,18 +7,20 @@
     <!-- Activities & drawer -->
     <string name="title_news">Notizie</string>
     <string name="title_categories">Categorie</string>
-    <string name="title_about">Chi siamo</string>
-
-    <!-- Menus -->
-    <string name="string_settings">Impostazioni</string>
-    <string name="title_contacts">Contatti</string>
+    <string name="title_about">Info &amp; contatti</string>
     <string name="title_places">Dove studiare</string>
     <string name="title_help">Domande frequenti</string>
     <string name="title_info">Informazioni</string>
-    <string name="key_news_list">com.liggiorgio.rumapp.KEY_NEWS_LIST</string>
+
+    <!-- Menus -->
+    <string name="string_settings">Impostazioni</string>
     <string name="image_icon">Icona</string>
-    <string name="loading">Caricamento...</string>
+    <string name="loading">Caricamento…</string>
     <string name="read_external">Leggi online</string>
     <string name="read_share">Condividi</string>
+
+    <!-- App data keys -->
+    <string name="key_news_list">com.liggiorgio.rumapp.KEY_NEWS_LIST</string>
+
 
 </resources>

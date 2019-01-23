@@ -20,6 +20,6 @@ public class PlacesActivity extends DrawerActivity {
 
     @Override
     protected int getMenuItemId() {
-        return 4;
+        return 3;
     }
 }

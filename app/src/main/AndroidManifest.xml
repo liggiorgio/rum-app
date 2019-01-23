@@ -36,11 +36,6 @@
                 android:parentActivityName=".news.NewsActivity">
         </activity>
         <activity
-                android:name=".conts.ContactsActivity"
-                android:label="@string/title_contacts"
-                android:parentActivityName=".news.NewsActivity">
-        </activity>
-        <activity
                 android:name=".places.PlacesActivity"
                 android:label="@string/title_places"
                 android:parentActivityName=".news.NewsActivity">

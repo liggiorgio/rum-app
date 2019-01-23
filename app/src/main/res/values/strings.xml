@@ -22,5 +22,35 @@
     <!-- App data keys -->
     <string name="key_news_list">com.liggiorgio.rumapp.KEY_NEWS_LIST</string>
 
+    <!-- App text contents -->
+    <string name="about_title1">Cos\'è RUM?</string>
+    <string name="about_text1">
+        La R.U.M. nasce dalla volontà di un gruppo di studenti e giovani laureati che, preso atto delle eterogenee realtà
+        territoriali, hanno voluto creare una rete di coordinamento capace di sintetizzare mille voci in una sola, forte
+        voce.\n\nRUM è rappresentanza, RUM è impegno, RUM è Famiglia.
+    </string>
+    <string name="about_title2">La nostra missione</string>
+    <string name="about_text2">
+        RUM si prefigge tre grandi obiettivi:\n\n
+        &#8226; RIFORMA DELLA GOVERNANCE UNIVERSITARIA\n
+        &#8226; MAGGIORE ATTENZIONE AI POLI DECENTRATI\n
+        &#8226; LA BUONA RAPPRESENTANZA
+    </string>
+    <string name="about_title3">Contattaci</string>
+    <string name="about_text3">Vieni a trovarci, contattaci attraverso i nostri recapiti oppure sui nostri profili
+        social!
+    </string>
+    <string name="about_phone">+39 320 805 8457</string>
+    <string name="about_email">reteuniversitariamediterranea@gmail.com</string>
+    <string name="about_address">Viale delle Scienze, 90128 Palermo (PA)</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="instagram">Instagram</string>
+    <string name="youtube">YouTube</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="youtube">YouTube</string>
+    <string name="instagram">Instagram</string>
+
 
 </resources>

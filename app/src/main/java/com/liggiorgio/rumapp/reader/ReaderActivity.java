@@ -75,13 +75,14 @@ public class ReaderActivity extends ParentActivity {
     @SuppressWarnings("deprecation")
     private void updateView() {
         // Load text from web page
+        ReaderImageGetter imageGetter = new ReaderImageGetter(findViewById(R.id.reader_text), getApplicationContext());
         ((TextView) findViewById(R.id.reader_title)).setText(article.getTitle());
         ((TextView) findViewById(R.id.reader_author)).setText(article.getAuthor());
         ((TextView) findViewById(R.id.reader_categories)).setText(article.getCategories());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            ((TextView) findViewById(R.id.reader_text)).setText(Html.fromHtml(article.getText(), Html.FROM_HTML_MODE_LEGACY));
+            ((TextView) findViewById(R.id.reader_text)).setText(Html.fromHtml(article.getText(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null));
         } else {
-            ((TextView) findViewById(R.id.reader_text)).setText(Html.fromHtml(article.getText()));
+            ((TextView) findViewById(R.id.reader_text)).setText(Html.fromHtml(article.getText(), imageGetter, null));
         }
         (findViewById(R.id.reader_text)).setClickable(true);
         ((TextView) findViewById(R.id.reader_text)).setMovementMethod(LinkMovementMethod.getInstance());

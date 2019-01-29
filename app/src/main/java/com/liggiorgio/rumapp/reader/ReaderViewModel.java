@@ -27,8 +27,7 @@ public class ReaderViewModel extends ViewModel implements AsyncResponse {
         new ArticleFetchAsyncTask(this).execute(url);
     }
 
-    // Add fetched news to current list, or add placeholders
-    // if no internet connection is available
+    // Add fetched news to current page
     @Override
     public void processFinish(ArticleItem output) {
         if (output != null) {

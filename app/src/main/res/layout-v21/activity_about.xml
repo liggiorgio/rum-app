@@ -90,7 +90,7 @@
                 android:layout_marginRight="10dp" android:drawableStart="@drawable/ic_about_phone"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:textSize="15sp" android:textAllCaps="false" android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/about_text3"/>
+                app:layout_constraintTop_toBottomOf="@+id/about_text3" android:onClick="buttonPress"/>
         <ImageView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/line_divider"
@@ -113,7 +113,7 @@
                 android:layout_marginRight="10dp" android:drawableStart="@drawable/ic_about_email"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:textSize="15sp" app:layout_constraintTop_toBottomOf="@+id/imageView11"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false" android:onClick="buttonPress"/>
         <ImageView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/line_divider"
@@ -136,7 +136,8 @@
                 android:layout_marginRight="10dp" android:drawableStart="@drawable/ic_about_address"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@+id/imageView12" android:textAllCaps="false"/>
+                app:layout_constraintTop_toBottomOf="@+id/imageView12" android:textAllCaps="false"
+                android:onClick="buttonPress"/>
         <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -148,7 +149,7 @@
                 android:text="@string/facebook" android:textSize="10sp"
                 android:textAllCaps="false" app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintEnd_toStartOf="@+id/button_twitter" app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="32dp"/>
+                android:layout_marginBottom="32dp" android:onClick="buttonPress"/>
         <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -159,7 +160,7 @@
                 app:layout_constraintTop_toTopOf="@+id/button_facebook"
                 app:layout_constraintStart_toEndOf="@+id/button_facebook"
                 android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintEnd_toStartOf="@+id/button_instagram"/>
+                app:layout_constraintEnd_toStartOf="@+id/button_instagram" android:onClick="buttonPress"/>
         <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -170,7 +171,7 @@
                 app:layout_constraintTop_toTopOf="@+id/button_facebook"
                 app:layout_constraintStart_toEndOf="@+id/button_twitter"
                 android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintEnd_toStartOf="@+id/button_youtube"/>
+                app:layout_constraintEnd_toStartOf="@+id/button_youtube" android:onClick="buttonPress"/>
         <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -182,7 +183,7 @@
                 app:layout_constraintStart_toEndOf="@+id/button_instagram"
                 android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="16dp"
-                app:layout_constraintHorizontal_bias="0.5"/>
+                app:layout_constraintHorizontal_bias="0.5" android:onClick="buttonPress"/>
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/ic_about_star"

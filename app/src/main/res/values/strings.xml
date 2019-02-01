@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Global -->
     <string name="app_name">RUM App</string>
@@ -21,6 +21,7 @@
 
     <!-- App data keys -->
     <string name="key_news_list">com.liggiorgio.rumapp.KEY_NEWS_LIST</string>
+    <string name="key_scroll_height">com.liggiorgio.rumapp.KEY_SCROLL_HEIGHT</string>
 
     <!-- App text contents -->
     <string name="about_title1">Cos\'è RUM?</string>
@@ -47,6 +48,15 @@
     <string name="twitter">Twitter</string>
     <string name="instagram">Instagram</string>
     <string name="youtube">YouTube</string>
-    <string name="key_scroll_height">com.liggiorgio.rumapp.KEY_SCROLL_HEIGHT</string>
+    <string name="mail_subject">Email tramite RUM App</string>
+    <string name="about_location_query">Auletta R.U.M. Associazione studentesca, Palermo, PA</string>
+    <string name="facebook_id">rete.universitaria.mediterranea</string>
+    <string name="facebook_url">https://www.facebook.com/rete.universitaria.mediterranea</string>
+    <string name="twitter_id">128848765</string>
+    <string name="twitter_url">http://twitter.com/rum_unipa</string>
+    <string name="instagram_id">rumunipa</string>
+    <string name="instagram_url">http://instagram.com/rumunipa</string>
+    <string name="youtube_url">rumuniversita</string>
+    <string name="mail_content">Cari ragazzi di RUM,\n\nVi contatto per chiedervi…</string>
 
 </resources>

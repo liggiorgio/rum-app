@@ -9,8 +9,7 @@
 
     <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
                                                  android:layout_height="wrap_content"
-                                                 android:orientation="vertical" android:id="@+id/about_container"
-    >
+                                                 android:orientation="vertical" android:id="@+id/about_container">
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="192dp" app:srcCompat="@mipmap/rum_about"
@@ -24,9 +23,10 @@
                 android:layout_height="wrap_content" android:textSize="20sp"
                 android:textColor="@color/colorPrimary" android:textStyle="bold"
                 android:id="@+id/about_title1"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp" android:layout_marginTop="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/about_cover"/>
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView3"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView3"/>
         <TextView
                 android:text="@string/about_text1"
                 android:layout_width="0dp"
@@ -37,24 +37,16 @@
                 android:layout_marginStart="10dp" android:layout_marginTop="10dp"
                 app:layout_constraintTop_toBottomOf="@+id/about_title1" app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="10dp" android:layout_marginRight="10dp"/>
-        <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" app:srcCompat="@drawable/line_divider"
-                android:scaleType="fitXY"
-                android:id="@+id/imageView1"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/about_text1" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-        />
         <TextView
                 android:text="@string/about_title2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:textSize="20sp"
                 android:textColor="@color/colorPrimary" android:textStyle="bold"
                 android:id="@+id/about_title2"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/imageView1" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="10dp" android:layout_marginStart="10dp"/>
+                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView6"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView6"/>
         <TextView
                 android:text="@string/about_text2"
                 android:layout_width="0dp"
@@ -66,24 +58,16 @@
                 android:layout_marginLeft="10dp" android:layout_marginStart="10dp"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"/>
-        <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" app:srcCompat="@drawable/line_divider"
-                android:scaleType="fitXY"
-                android:id="@+id/imageView2"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/about_text2" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-        />
         <TextView
                 android:text="@string/about_title3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:textSize="20sp"
                 android:textColor="@color/colorPrimary" android:textStyle="bold"
                 android:id="@+id/about_title3"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" android:layout_marginTop="16dp"/>
+                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView7"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView7"/>
         <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -98,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/ic_about_phone"
                 android:id="@+id/button_image1" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="24dp" android:layout_marginStart="24dp"
+                android:layout_marginLeft="22dp" android:layout_marginStart="22dp"
                 app:layout_constraintTop_toTopOf="@+id/button_call"
                 app:layout_constraintBottom_toBottomOf="@+id/button_call"/>
         <Button
@@ -128,7 +112,7 @@
                 android:layout_height="wrap_content" app:srcCompat="@drawable/ic_about_email"
                 android:id="@+id/button_image2"
                 app:layout_constraintTop_toTopOf="@+id/button_mail" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="24dp" android:layout_marginStart="24dp"
+                android:layout_marginLeft="22dp" android:layout_marginStart="22dp"
                 app:layout_constraintBottom_toBottomOf="@+id/button_mail"/>
         <Button
                 android:text="@string/about_email"
@@ -167,7 +151,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/ic_about_address"
                 android:id="@+id/button_image3" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="24dp" android:layout_marginStart="24dp"
+                android:layout_marginLeft="22dp" android:layout_marginStart="22dp"
                 app:layout_constraintTop_toTopOf="@+id/button_map"
                 app:layout_constraintBottom_toBottomOf="@+id/button_map"/>
         <ImageButton
@@ -255,6 +239,24 @@
                 app:layout_constraintEnd_toEndOf="@+id/button_twitter"
                 app:layout_constraintTop_toTopOf="@+id/button_twitter" android:layout_marginTop="58dp"
                 android:paddingBottom="4dp"/>
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:srcCompat="@drawable/ic_about_star"
+                android:id="@+id/imageView3" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="10dp" android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/about_cover"/>
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:srcCompat="@drawable/ic_about_compass"
+                android:id="@+id/imageView6" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="10dp" android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/about_text1"/>
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:srcCompat="@drawable/ic_about_contact"
+                android:id="@+id/imageView7" app:layout_constraintTop_toBottomOf="@+id/about_text2"
+                android:layout_marginTop="16dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="10dp" android:layout_marginLeft="10dp"/>
     </android.support.constraint.ConstraintLayout>
 
 </ScrollView>

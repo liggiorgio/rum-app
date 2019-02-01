@@ -47,5 +47,6 @@
     <string name="twitter">Twitter</string>
     <string name="instagram">Instagram</string>
     <string name="youtube">YouTube</string>
+    <string name="key_scroll_height">com.liggiorgio.rumapp.KEY_SCROLL_HEIGHT</string>
 
 </resources>

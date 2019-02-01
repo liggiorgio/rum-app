@@ -5,7 +5,8 @@
             android:layout_height="match_parent"
             android:scrollbars="vertical"
             android:scrollbarSize="5dp"
-            android:scrollbarThumbVertical="@android:color/darker_gray" android:background="@color/colorForeground">
+            android:scrollbarThumbVertical="@android:color/darker_gray" android:background="@color/colorForeground"
+            android:id="@+id/about_scroller">
 
     <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
                                                  android:layout_height="wrap_content"

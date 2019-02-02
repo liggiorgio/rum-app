@@ -12,7 +12,7 @@
                                                  android:layout_height="wrap_content"
                                                  android:orientation="vertical" android:id="@+id/about_container">
         <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="192dp" app:srcCompat="@mipmap/rum_about"
                 android:scaleType="centerCrop"
                 android:id="@+id/about_cover" app:layout_constraintTop_toTopOf="parent"

@@ -12,7 +12,7 @@
                                                  android:layout_height="wrap_content"
                                                  android:orientation="vertical" android:id="@+id/about_container">
         <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="192dp" app:srcCompat="@mipmap/rum_about"
                 android:scaleType="centerCrop"
                 android:id="@+id/about_cover" app:layout_constraintTop_toTopOf="parent"
@@ -189,7 +189,7 @@
                 app:srcCompat="@drawable/ic_about_youtube"
                 style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                android:layout_marginEnd="16dp" android:layout_marginRight="16dp"
                 app:layout_constraintStart_toEndOf="@+id/button_instagram" android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp" app:layout_constraintTop_toTopOf="@+id/button_facebook"
                 app:layout_constraintHorizontal_bias="0.5" android:onClick="buttonPress"/>

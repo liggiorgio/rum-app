@@ -28,6 +28,11 @@
                     android:layout_height="wrap_content" android:id="@+id/reader_title"
                     android:textColor="@color/colorPrimary" android:textSize="20sp" android:textStyle="bold"
                     android:layout_marginBottom="6dp"/>
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/reader_image"
+                    android:scaleType="fitCenter" android:adjustViewBounds="true" android:layout_marginBottom="6dp"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/reader_author" android:textSize="12sp"

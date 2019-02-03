@@ -1,6 +1,7 @@
 package com.liggiorgio.rumapp.reader;
 
 import android.os.AsyncTask;
+import android.util.Log;
 import org.apache.commons.text.StringEscapeUtils;
 
 import java.io.*;
@@ -9,6 +10,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static android.content.ContentValues.TAG;
 
 public class ArticleFetchAsyncTask extends AsyncTask<String, Void, ArticleItem> {
 
@@ -70,24 +73,27 @@ public class ArticleFetchAsyncTask extends AsyncTask<String, Void, ArticleItem> 
         // Build single news items
         Pattern pattern;
         Matcher matcher;
-        String title, author, text;
+        String title, image, author, text;
         StringBuilder cats;
 
         // Full article text is parsed
-        pattern = Pattern.compile("<h2.*>(.*?)</h2>.*<div class=\"author_wrapper.*>(.*?)\\sin\\s(<a.*</a>)</div>.*</fb:like></div></div>(.*?)<div class=\"addtoany_share_save_container");
+        pattern = Pattern.compile("<h2.*>(.*?)</h2>(<img.*/>)?.*<div class=\"author_wrapper.*>(.*?)\\sin\\s(<a.*</a>)</div>.*</fb:like></div></div>(.*?)<div class=\"addtoany_share_save_container");
         matcher = pattern.matcher(content);
         if (matcher.find()) {
             // Save data to be wrapped
             title = matcher.group(1).trim();
-            author = matcher.group(2).trim();
-            String[] cts = matcher.group(3).split(",");
+            image = matcher.group(2);
+            if (image != null)
+                image = "http:" + image.substring(image.indexOf("src=\"") + 5, image.indexOf("\" class"));
+            author = matcher.group(3).trim();
+            String[] cts = matcher.group(4).split(",");
             cats = new StringBuilder(cts[0].replaceAll("</a>", "").replaceAll("<a.*>", "").trim());
             for (int i=1; i<cts.length; i++) {
                 cats.append(", ");
                 cats.append(cts[i].replaceAll("</a>", "").replaceAll("<a.*>", "").trim());
             }
-            text = matcher.group(4).trim();
-            return new ArticleItem(title, author, cats.toString(), text);
+            text = matcher.group(5).trim();
+            return new ArticleItem(title, image, author, cats.toString(), text);
         }
 
         return null;

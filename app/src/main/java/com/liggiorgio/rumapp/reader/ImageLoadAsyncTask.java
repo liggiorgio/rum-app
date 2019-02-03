@@ -20,6 +20,7 @@ import static android.content.ContentValues.TAG;
 public class ImageLoadAsyncTask extends AsyncTask<String, Void, Bitmap> {
 
     private final ReaderImageGetter owner;
+    private final ReaderViewModel model;
     private LevelListDrawable urlDrawable;
     private final int right;
 
@@ -27,6 +28,14 @@ public class ImageLoadAsyncTask extends AsyncTask<String, Void, Bitmap> {
         this.owner = owner;
         this.urlDrawable = d;
         this.right = right;
+        this.model = null;
+    }
+
+    public ImageLoadAsyncTask(ReaderViewModel model) {
+        this.owner = null;
+        this.urlDrawable = null;
+        this.right = 0;
+        this.model = model;
     }
 
     @Override
@@ -52,13 +61,19 @@ public class ImageLoadAsyncTask extends AsyncTask<String, Void, Bitmap> {
         Log.d(TAG, "onPostExecute bitmap " + bitmap);
         if (bitmap != null) {
             Drawable d = new BitmapDrawable(bitmap);
+            if (model != null) {
+                model.setDrawable(d);
+                return;
+            }
             int multiplier = right/d.getIntrinsicWidth();
             urlDrawable.addLevel(1, 1, d);
             urlDrawable.setBounds(0, 0, right,d.getIntrinsicHeight()*multiplier);
             urlDrawable.setLevel(1);
+            assert owner != null;
             owner.refreshView();
         } else {
-            owner.error();
+            if (owner != null)
+                owner.error();
         }
     }
 }

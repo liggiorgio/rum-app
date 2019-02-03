@@ -3,6 +3,7 @@ package com.liggiorgio.rumapp.reader;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.liggiorgio.rumapp.ParentActivity;
@@ -23,6 +25,7 @@ public class ReaderActivity extends ParentActivity {
     private ArticleItem article;
     private ReaderViewModel model;
     private String title, ref;
+    private Drawable image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,15 @@ public class ReaderActivity extends ParentActivity {
             article = item;
             updateView();
         });
+        model.getDrawable().observe(this, item -> {
+            // Update image header
+            if (image == null) {
+                image = item;
+                if (item != null)
+                    findViewById(R.id.reader_image).setVisibility(View.VISIBLE);
+            }
+            updateHeader();
+        });
     }
 
     // Notify the user there's no network
@@ -72,17 +84,30 @@ public class ReaderActivity extends ParentActivity {
         Toast.makeText(getApplicationContext(), "Nessuna connessione Internet", Toast.LENGTH_SHORT).show();
     }
 
+    private void updateHeader() {
+        ((ImageView) findViewById(R.id.reader_image)).setImageDrawable(image);
+    }
+
     @SuppressWarnings("deprecation")
     private void updateView() {
         // Load text from web page
-        ReaderImageGetter imageGetter = new ReaderImageGetter(findViewById(R.id.reader_text), getApplicationContext());
+        //ReaderImageGetter headerGetter = new ReaderImageGetter(findViewById(R.id.reader_image), getApplicationContext());
+        ReaderImageGetter textGetter = new ReaderImageGetter(findViewById(R.id.reader_text), getApplicationContext());
         ((TextView) findViewById(R.id.reader_title)).setText(article.getTitle());
         ((TextView) findViewById(R.id.reader_author)).setText(article.getAuthor());
         ((TextView) findViewById(R.id.reader_categories)).setText(article.getCategories());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            ((TextView) findViewById(R.id.reader_text)).setText(Html.fromHtml(article.getText(), Html.FROM_HTML_MODE_LEGACY, imageGetter, null));
+            ((TextView) findViewById(R.id.reader_text)).setText(Html.fromHtml(article.getText(), Html.FROM_HTML_MODE_LEGACY, textGetter, null));
+            //if (article.getImage() != null) {
+            //    ((TextView) findViewById(R.id.reader_image)).setText(Html.fromHtml(article.getImage(), Html.FROM_HTML_MODE_LEGACY, headerGetter, null));
+            //    findViewById(R.id.reader_image).setVisibility(View.VISIBLE);
+            //}
         } else {
-            ((TextView) findViewById(R.id.reader_text)).setText(Html.fromHtml(article.getText(), imageGetter, null));
+            ((TextView) findViewById(R.id.reader_text)).setText(Html.fromHtml(article.getText(), textGetter, null));
+            //if (article.getImage() != null) {
+            //    ((TextView) findViewById(R.id.reader_image)).setText(Html.fromHtml(article.getImage(), headerGetter, null));
+            //    findViewById(R.id.reader_image).setVisibility(View.VISIBLE);
+            //}
         }
         (findViewById(R.id.reader_text)).setClickable(true);
         ((TextView) findViewById(R.id.reader_text)).setMovementMethod(LinkMovementMethod.getInstance());

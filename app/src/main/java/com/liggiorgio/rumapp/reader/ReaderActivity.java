@@ -15,6 +15,7 @@ import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.liggiorgio.rumapp.ParentActivity;
@@ -77,6 +78,18 @@ public class ReaderActivity extends ParentActivity {
             }
             updateHeader();
         });
+
+        // Restore scrolling Y offset
+        if (savedInstanceState != null) {
+            int offset = savedInstanceState.getInt(getString(R.string.key_scroll_height));
+            ScrollView scroller = findViewById(R.id.reader_scroller);
+            // TODO: test whether KitKat actually scrolls view
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                scroller.setScrollY(offset);
+            } else {
+                scroller.post(() -> scroller.setScrollY(offset));
+            }
+        }
     }
 
     // Notify the user there's no network
@@ -138,6 +151,16 @@ public class ReaderActivity extends ParentActivity {
         } else {
             Toast.makeText(getApplicationContext(), "Nessuna applicazione può eseguire l'azione", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    // Save current scrolling Y offset
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        int offset = findViewById(R.id.reader_scroller).getScrollY();
+        savedInstanceState.putInt(getString(R.string.key_scroll_height), offset);
+
+        // Call superclass
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override

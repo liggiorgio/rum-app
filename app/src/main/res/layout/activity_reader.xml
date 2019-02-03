@@ -17,7 +17,7 @@
             android:layout_marginTop="?attr/actionBarSize"
             android:scrollbars="vertical"
             android:scrollbarSize="5dp"
-            android:scrollbarThumbVertical="@android:color/darker_gray">
+            android:scrollbarThumbVertical="@android:color/darker_gray" android:id="@+id/reader_scroller">
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:orientation="vertical"

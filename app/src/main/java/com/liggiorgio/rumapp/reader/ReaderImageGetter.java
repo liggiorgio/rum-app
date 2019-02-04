@@ -23,12 +23,15 @@ public class ReaderImageGetter implements Html.ImageGetter {
     public Drawable getDrawable(String source) {
         // TODO: prevent image deletion due to configuration changes
         LevelListDrawable d = new LevelListDrawable();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Drawable empty = ContextCompat.getDrawable(context, R.drawable.ic_broken_image);
-            d.addLevel(0, 0, empty);
-            assert empty != null;
-            d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
-        }
+        int resId;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            resId = R.drawable.ic_broken_image;
+        else
+            resId = R.drawable.ic_broken_image_old;
+        Drawable empty = ContextCompat.getDrawable(context, resId);
+        d.addLevel(0, 0, empty);
+        assert empty != null;
+        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
         new ImageLoadAsyncTask(this, d, v.getRight()).execute("http:" + source);
         return d;
     }

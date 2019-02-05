@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.v7.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/cats_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".cats.CategoriesActivity">
-
-</android.support.constraint.ConstraintLayout>
+        android:scrollbars="vertical"
+        android:scrollbarSize="5dp"
+        android:scrollbarThumbVertical="@android:color/darker_gray">
+</android.support.v7.widget.RecyclerView>

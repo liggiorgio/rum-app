@@ -11,10 +11,12 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import com.liggiorgio.rumapp.DrawerActivity;
@@ -22,10 +24,7 @@ import com.liggiorgio.rumapp.R;
 import com.liggiorgio.rumapp.reader.ReaderActivity;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
+import java.util.*;
 
 public class NewsActivity extends DrawerActivity {
 
@@ -56,8 +55,19 @@ public class NewsActivity extends DrawerActivity {
         // News list dataset
         newsList = new ArrayList<>();
 
+        // Do we need to fetch a category?
+        Intent intent = getIntent();
+        String path = intent.getStringExtra("PATH");
+        String cat = intent.getStringExtra("CAT");
+
+        // News are based on category
+        if (cat != null)
+            Objects.requireNonNull(getSupportActionBar()).setTitle(cat);
+
         // Create view model for news list
         model = ViewModelProviders.of(this).get(NewsViewModel.class);
+        if (path != null)
+            model.setPath(path);
         model.getNews().observe(this, news -> {
             // Update UI
             if (newsList.size() > 0) {
@@ -131,8 +141,10 @@ public class NewsActivity extends DrawerActivity {
         }));
 
         // Load previously fetched news
-        model.pushList(loadList());
-
+         if (path == null && cat == null) {
+            // Load all saved news
+            model.pushList(loadList());
+        }
     }
 
     // Notify the user there's no network
@@ -165,18 +177,20 @@ public class NewsActivity extends DrawerActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        LinkedHashSet<String> mySet = new LinkedHashSet<>();
-        int c = 0;
-        for (NewsItem i : newsList) {
-            mySet.add(StringUtils.leftPad(String.valueOf(c++), 3, '0') + "§" + i.getIcon() + "§" + i.getRef() + "§" + i.getTitle() + "§" + i.getDate() + "§" + i.getCategories() + "§" + i.getText());
-            // Limit capacity to prevent app crashes
-            if (c == 128)
-                break;
+        if (!model.isPathSet()) {
+            SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            LinkedHashSet<String> mySet = new LinkedHashSet<>();
+            int c = 0;
+            for (NewsItem i : newsList) {
+                mySet.add(StringUtils.leftPad(String.valueOf(c++), 3, '0') + "§" + i.getIcon() + "§" + i.getRef() + "§" + i.getTitle() + "§" + i.getDate() + "§" + i.getCategories() + "§" + i.getText());
+                // Limit capacity to prevent app crashes
+                if (c == 128)
+                    break;
+            }
+            editor.putStringSet(getResources().getString(R.string.key_news_list), mySet);
+            editor.apply();
         }
-        editor.putStringSet(getResources().getString(R.string.key_news_list), mySet);
-        editor.apply();
     }
 
     @Override

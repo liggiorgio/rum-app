@@ -55,6 +55,10 @@ public class NewsFetchAsyncTask extends AsyncTask<String, Void, ArrayList<NewsIt
                 reply.append(inputLine);
             }
             in.close();
+        } catch (FileNotFoundException e) {
+            // TODO: No more news to load, add message?
+            e.printStackTrace();
+            return new ArrayList<>();
         } catch (IOException e) {
             e.printStackTrace();
             return new ArrayList<>();

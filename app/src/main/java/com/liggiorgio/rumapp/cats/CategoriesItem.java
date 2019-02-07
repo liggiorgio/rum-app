@@ -4,12 +4,12 @@ public class CategoriesItem {
 
     private final int icon;
     private final String title;
-    private final String ref;
+    private final String path;
 
-    public CategoriesItem(int icon, String title, String ref) {
+    public CategoriesItem(int icon, String title, String path) {
         this.icon = icon;
         this.title = title;
-        this.ref = ref;
+        this.path = path;
     }
 
     public int getIcon() {
@@ -20,7 +20,7 @@ public class CategoriesItem {
         return title;
     }
 
-    public String getRef() {
-        return ref;
+    public String getPath() {
+        return path;
     }
 }

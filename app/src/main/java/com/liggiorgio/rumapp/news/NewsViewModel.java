@@ -12,6 +12,7 @@ public class NewsViewModel extends ViewModel implements AsyncResponse {
     private ArrayList<NewsItem> allNews;
     private MutableLiveData<List<NewsItem>> latestNews;
     private int page = 1;
+    private String path = "";
     private boolean firstLoad = true;
 
     public LiveData<List<NewsItem>> getNews() {
@@ -25,7 +26,7 @@ public class NewsViewModel extends ViewModel implements AsyncResponse {
 
     // Get latest news
     void fetchNews() {
-        String url = "http://www.reteuniversitariamediterranea.it/page/" + page +"/?s";
+        String url = "http://www.reteuniversitariamediterranea.it" + path + "/page/" + page +"/?s";
         page++;
         new NewsFetchAsyncTask(this).execute(url);
     }
@@ -35,6 +36,18 @@ public class NewsViewModel extends ViewModel implements AsyncResponse {
         //firstLoad = false;
         allNews.addAll(stored);
         latestNews.setValue(allNews);
+    }
+
+    // Set alternate path for categories browsing
+    void setPath(String path) {
+        this.path = path;
+        //allNews.clear();
+        //latestNews.setValue(allNews);
+        //page = 1;
+    }
+
+    boolean isPathSet() {
+        return !path.equals("");
     }
 
     // Add fetched news to current list

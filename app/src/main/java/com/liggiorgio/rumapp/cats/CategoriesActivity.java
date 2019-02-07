@@ -4,15 +4,12 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 import com.liggiorgio.rumapp.DrawerActivity;
 import com.liggiorgio.rumapp.R;
 import com.liggiorgio.rumapp.news.*;
-import com.liggiorgio.rumapp.reader.ReaderActivity;
 
 import java.util.ArrayList;
 
@@ -64,7 +61,13 @@ public class CategoriesActivity extends DrawerActivity {
         catsRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, catsRecyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Toast.makeText(CategoriesActivity.this, "Single Click on position: " + position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(CategoriesActivity.this, "Single Click on position: " + position, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), NewsActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("PATH", catsList.get(position).getPath());
+                intent.putExtra("CAT", catsList.get(position).getTitle());
+                startActivity(intent);
+                //finish();
             }
 
             @Override

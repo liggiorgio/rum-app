@@ -151,6 +151,7 @@ public class ReaderActivity extends ParentActivity {
     public void actionExternal(View v) {
         Intent browserIntent = new Intent();
         browserIntent.setAction(Intent.ACTION_VIEW);
+        browserIntent.addCategory(Intent.CATEGORY_BROWSABLE);
         browserIntent.setData(Uri.parse(ref));
         if (browserIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(browserIntent);

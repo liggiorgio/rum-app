@@ -118,6 +118,7 @@ public class NewsActivity extends DrawerActivity {
             public void onClick(View view, int position) {
                 //Toast.makeText(NewsActivity.this, "Single Click on position: " + position, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), ReaderActivity.class);
+                intent.setAction(Intent.ACTION_MAIN);
                 intent.putExtra("TITLE", newsList.get(position).getTitle());
                 intent.putExtra("REF", newsList.get(position).getRef());
                 startActivity(intent);

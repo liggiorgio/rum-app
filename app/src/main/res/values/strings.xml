@@ -6,6 +6,7 @@
 
     <!-- Activities & drawer -->
     <string name="title_news">Notizie</string>
+    <string name="title_reader">@string/app_name</string>
     <string name="title_categories">Categorie</string>
     <string name="title_about">Info &amp; contatti</string>
     <string name="title_places">Dove studiare</string>

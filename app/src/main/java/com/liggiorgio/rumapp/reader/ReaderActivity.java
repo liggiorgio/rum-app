@@ -9,9 +9,12 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBar;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,6 +23,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.liggiorgio.rumapp.ParentActivity;
 import com.liggiorgio.rumapp.R;
+
+import java.util.List;
+import java.util.Objects;
+
+import static android.content.ContentValues.TAG;
 
 public class ReaderActivity extends ParentActivity {
 
@@ -32,16 +40,36 @@ public class ReaderActivity extends ParentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Retrieve intent extras
-        Intent intent = getIntent();
-        title = intent.getStringExtra("TITLE");
-        ref = intent.getStringExtra("REF");
+        // Retrieve intent data
+        final Intent intent = getIntent();
+        final String action = intent.getAction();
+
+        if (Intent.ACTION_MAIN.equals(action)) {
+            // Regular intent
+            title = intent.getStringExtra("TITLE");
+            ref = intent.getStringExtra("REF");
+            Log.d(TAG, "Regular in-app reader");
+        } else {
+            // Intent from opening link
+            final List<String> segments = Objects.requireNonNull(intent.getData()).getPathSegments();
+            if (segments.size() == 4) {
+                // URL has correct format
+                ref = intent.getDataString();
+            } else {
+                // Wrong URL format
+                Toast.makeText(getApplicationContext(), "Formato URL errato", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
 
         // Enable home/up buttons, set title
         ActionBar actionbar = getSupportActionBar();
         assert actionbar != null;
         actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setTitle(title);
+        if (title != null)
+            actionbar.setTitle(title);
+        else
+            actionbar.setTitle(R.string.loading);
 
         // Check connectivity status
         ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -104,23 +132,15 @@ public class ReaderActivity extends ParentActivity {
     @SuppressWarnings("deprecation")
     private void updateView() {
         // Load text from web page
-        //ReaderImageGetter headerGetter = new ReaderImageGetter(findViewById(R.id.reader_image), getApplicationContext());
         ReaderImageGetter textGetter = new ReaderImageGetter(findViewById(R.id.reader_text), getApplicationContext());
+        Objects.requireNonNull(getSupportActionBar()).setTitle(article.getTitle());
         ((TextView) findViewById(R.id.reader_title)).setText(article.getTitle());
         ((TextView) findViewById(R.id.reader_author)).setText(article.getAuthor());
         ((TextView) findViewById(R.id.reader_categories)).setText(article.getCategories());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             ((TextView) findViewById(R.id.reader_text)).setText(Html.fromHtml(article.getText(), Html.FROM_HTML_MODE_LEGACY, textGetter, null));
-            //if (article.getImage() != null) {
-            //    ((TextView) findViewById(R.id.reader_image)).setText(Html.fromHtml(article.getImage(), Html.FROM_HTML_MODE_LEGACY, headerGetter, null));
-            //    findViewById(R.id.reader_image).setVisibility(View.VISIBLE);
-            //}
         } else {
             ((TextView) findViewById(R.id.reader_text)).setText(Html.fromHtml(article.getText(), textGetter, null));
-            //if (article.getImage() != null) {
-            //    ((TextView) findViewById(R.id.reader_image)).setText(Html.fromHtml(article.getImage(), headerGetter, null));
-            //    findViewById(R.id.reader_image).setVisibility(View.VISIBLE);
-            //}
         }
         (findViewById(R.id.reader_text)).setClickable(true);
         ((TextView) findViewById(R.id.reader_text)).setMovementMethod(LinkMovementMethod.getInstance());
@@ -167,7 +187,21 @@ public class ReaderActivity extends ParentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home: {
-                onBackPressed();
+                Intent upIntent = NavUtils.getParentActivityIntent(this);
+                assert upIntent != null;
+                if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+                    // This activity is NOT part of this app's task, so create a new task
+                    // when navigating up, with a synthesized back stack.
+                    TaskStackBuilder.create(this)
+                            // Add all of this activity's parents to the back stack
+                            .addNextIntentWithParentStack(upIntent)
+                            // Navigate up to the closest parent
+                            .startActivities();
+                } else {
+                    // This activity is part of this app's task, so simply
+                    // navigate up to the logical parent activity.
+                    onBackPressed();
+                }
                 return true;
             }
         }

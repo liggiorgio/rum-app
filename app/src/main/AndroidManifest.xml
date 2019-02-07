@@ -52,7 +52,16 @@
         </activity>
         <activity
                 android:name=".reader.ReaderActivity"
-                android:label="@string/loading">
+                android:label="@string/title_reader"
+                android:parentActivityName=".news.NewsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+                <data android:host="www.reteuniversitariamediterranea.it" />
+                <data android:pathPattern="/.*/.*/.*/..*" />
+            </intent-filter>
         </activity>
     </application>
 

@@ -116,7 +116,11 @@ public class NewsActivity extends DrawerActivity {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 // Load more news while scrolling
-                model.fetchNews();
+                if (newsList.get(newsList.size() - 1) != null) {
+                    newsList.add(null);
+                    newsAdapter.notifyItemInserted(newsList.size() - 1);
+                    model.fetchNews();
+                }
             }
         };
 
@@ -182,6 +186,7 @@ public class NewsActivity extends DrawerActivity {
             SharedPreferences.Editor editor = prefs.edit();
             LinkedHashSet<String> mySet = new LinkedHashSet<>();
             int c = 0;
+            newsList.removeAll(Collections.singleton(null));
             for (NewsItem i : newsList) {
                 mySet.add(StringUtils.leftPad(String.valueOf(c++), 3, '0') + "§" + i.getIcon() + "§" + i.getRef() + "§" + i.getTitle() + "§" + i.getDate() + "§" + i.getCategories() + "§" + i.getText());
                 // Limit capacity to prevent app crashes

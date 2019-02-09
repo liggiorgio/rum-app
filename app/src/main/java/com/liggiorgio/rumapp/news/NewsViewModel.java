@@ -58,8 +58,8 @@ public class NewsViewModel extends ViewModel implements AsyncResponse {
                 firstLoad = false;
                 allNews.clear();
             }
-            allNews.addAll(output);
-            latestNews.setValue(allNews);
         }
+        allNews.addAll(output);
+        latestNews.setValue(allNews);
     }
 }

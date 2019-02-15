@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- Global -->
     <string name="app_name">RUM App</string>
@@ -11,7 +11,7 @@
     <string name="title_about">Info &amp; contatti</string>
     <string name="title_places">Dove studiare</string>
     <string name="title_help">Domande frequenti</string>
-    <string name="title_info">Informazioni</string>
+    <string name="title_settings">Impostazioni</string>
 
     <!-- Menus -->
     <string name="string_settings">Impostazioni</string>

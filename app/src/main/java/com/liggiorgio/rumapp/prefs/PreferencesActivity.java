@@ -1,10 +1,10 @@
-package com.liggiorgio.rumapp.info;
+package com.liggiorgio.rumapp.prefs;
 
 import android.os.Bundle;
 import com.liggiorgio.rumapp.DrawerActivity;
 import com.liggiorgio.rumapp.R;
 
-public class InfoActivity extends DrawerActivity {
+public class PreferencesActivity extends DrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +15,7 @@ public class InfoActivity extends DrawerActivity {
 
     @Override
     protected int getChildLayoutResourceId() {
-        return R.layout.activity_info;
+        return R.layout.activity_prefs;
     }
 
     @Override

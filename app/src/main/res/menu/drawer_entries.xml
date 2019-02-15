@@ -29,7 +29,7 @@
                 android:title="@string/title_help"/>
         <item
                 android:id="@+id/action_info"
-                android:icon="@drawable/ic_action_info"
-                android:title="@string/title_info"/>
+                android:icon="@drawable/ic_action_settings"
+                android:title="@string/title_settings"/>
     </group>
 </menu>

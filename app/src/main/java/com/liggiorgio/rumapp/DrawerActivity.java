@@ -18,7 +18,7 @@ import android.widget.LinearLayout;
 import com.liggiorgio.rumapp.about.AboutActivity;
 import com.liggiorgio.rumapp.cats.CategoriesActivity;
 import com.liggiorgio.rumapp.help.HelpActivity;
-import com.liggiorgio.rumapp.info.InfoActivity;
+import com.liggiorgio.rumapp.prefs.PreferencesActivity;
 import com.liggiorgio.rumapp.news.NewsActivity;
 import com.liggiorgio.rumapp.places.PlacesActivity;
 
@@ -90,7 +90,7 @@ public abstract class DrawerActivity extends ParentActivity {
                         } break;
                         case R.id.action_info: {
                             // Go to info activity
-                            Intent intent = new Intent(getApplicationContext(), InfoActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), PreferencesActivity.class);
                             startActivity(intent);
                             //finish();
                         } break;

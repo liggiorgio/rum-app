@@ -46,8 +46,8 @@
                 android:parentActivityName=".news.NewsActivity">
         </activity>
         <activity
-                android:name=".info.InfoActivity"
-                android:label="@string/title_info"
+                android:name=".prefs.PreferencesActivity"
+                android:label="@string/title_settings"
                 android:parentActivityName=".news.NewsActivity">
         </activity>
         <activity

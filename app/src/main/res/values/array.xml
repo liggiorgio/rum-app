@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="loadingEntries">
+        <item>Bassa</item>
+        <item>Normale</item>
+        <item>Alta</item>
+    </string-array>
+
+    <string-array name="loadingValues">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+    </string-array>
+</resources>

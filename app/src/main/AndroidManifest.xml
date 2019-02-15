@@ -48,6 +48,7 @@
         <activity
                 android:name=".prefs.PreferencesActivity"
                 android:label="@string/title_settings"
+                android:theme="@style/PrefsTheme"
                 android:parentActivityName=".news.NewsActivity">
         </activity>
         <activity

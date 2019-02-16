@@ -3,6 +3,7 @@ package com.liggiorgio.rumapp.reader;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBar;
+import android.support.v7.preference.PreferenceManager;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -90,6 +92,8 @@ public class ReaderActivity extends ParentActivity {
         // Create view model for news list
         model = ViewModelProviders.of(this).get(ReaderViewModel.class);
         model.setUrl(ref);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        model.setImagePref(prefs.getBoolean("prefLoadImages", true));
         model.getArticle().observe(this, item -> {
             // Update UI
             if (article == null)
@@ -132,7 +136,9 @@ public class ReaderActivity extends ParentActivity {
     @SuppressWarnings("deprecation")
     private void updateView() {
         // Load text from web page
-        ReaderImageGetter textGetter = new ReaderImageGetter(findViewById(R.id.reader_text), getApplicationContext());
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        boolean loadImage = prefs.getBoolean("prefLoadImages", true);
+        ReaderImageGetter textGetter = new ReaderImageGetter(findViewById(R.id.reader_text), getApplicationContext(), loadImage);
         Objects.requireNonNull(getSupportActionBar()).setTitle(article.getTitle());
         ((TextView) findViewById(R.id.reader_title)).setText(article.getTitle());
         ((TextView) findViewById(R.id.reader_author)).setText(article.getAuthor());

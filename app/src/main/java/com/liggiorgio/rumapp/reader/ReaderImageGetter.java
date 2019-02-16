@@ -13,10 +13,12 @@ import com.liggiorgio.rumapp.R;
 public class ReaderImageGetter implements Html.ImageGetter {
     private Context context;
     private TextView v;
+    private boolean loadImage;
 
-    public ReaderImageGetter(TextView v, Context context) {
+    public ReaderImageGetter(TextView v, Context context, boolean loadImage) {
         this.v = v;
         this.context = context;
+        this.loadImage = loadImage;
     }
 
     @Override
@@ -24,6 +26,14 @@ public class ReaderImageGetter implements Html.ImageGetter {
         // TODO: prevent image deletion due to configuration changes
         LevelListDrawable d = new LevelListDrawable();
         int resId;
+        if (!loadImage) {
+            resId = R.drawable.line_divider;
+            Drawable empty = ContextCompat.getDrawable(context, resId);
+            d.addLevel(0, 0, empty);
+            assert empty != null;
+            d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
+            return d;
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             resId = R.drawable.ic_broken_image;
         else

@@ -4,6 +4,7 @@
 
 package com.liggiorgio.rumapp.news;
 
+import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
@@ -112,7 +114,9 @@ public class NewsActivity extends DrawerActivity {
         newsRecyclerView.setAdapter(newsAdapter);
 
         // Enable infinite scrolling
-        scrollListener = new EndlessRecyclerViewScrollListener((LinearLayoutManager) newsLayoutManager) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        int vt = Integer.parseInt(prefs.getString("prefLoadingSpeed", "10"));
+        scrollListener = new EndlessRecyclerViewScrollListener((LinearLayoutManager) newsLayoutManager, vt) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 // Load more news while scrolling

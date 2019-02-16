@@ -20,6 +20,6 @@ public class PreferencesActivity extends DrawerActivity {
 
     @Override
     protected int getMenuItemId() {
-        return 5;
+        return 3;
     }
 }

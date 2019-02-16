@@ -174,14 +174,7 @@ public class NewsActivity extends DrawerActivity {
         }
         return news;
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu
-        getMenuInflater().inflate(R.menu.news_menu, menu);
-        return true;
-    }
-
+    
     @Override
     protected void onPause() {
         super.onPause();

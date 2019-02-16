@@ -76,18 +76,6 @@ public abstract class DrawerActivity extends ParentActivity {
                             startActivity(intent);
                             //finish();
                         } break;
-                        case R.id.action_places: {
-                            // Go to places activity
-                            Intent intent = new Intent(getApplicationContext(), PlacesActivity.class);
-                            startActivity(intent);
-                            //finish();
-                        } break;
-                        case R.id.action_help: {
-                            // Go to FAQ activity
-                            Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
-                            startActivity(intent);
-                            //finish();
-                        } break;
                         case R.id.action_info: {
                             // Go to info activity
                             Intent intent = new Intent(getApplicationContext(), PreferencesActivity.class);
